@@ -1,0 +1,159 @@
+\documentclass[12pt,a4paper]{ctexart}
+
+% ===== 页面设置 =====
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+% ===== 页眉页脚 =====
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{高等数学（第七版·下册）}}
+\fancyhead[R]{\textbf{习题11-1 第3题(8)}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+
+% ===== 自定义环境 =====
+\newtheoremstyle{myremark}
+  {0.5\topsep}{0.5\topsep}
+  {\normalfont}{}
+  {\bfseries\color{blue!60!black}}{：}{0.5em}{}
+\theoremstyle{myremark}
+\newtheorem*{remark}{解}
+
+% 方框答案
+\newcommand{\answerbox}[1]{%
+  \begin{center}
+  \fbox{\color{red}\large\bfseries #1}
+  \end{center}
+}
+
+% ===== 文档信息 =====
+\title{\Huge\bfseries 习题11-1~~第3题(8)}
+\author{高等数学（同济大学数学系~编·第七版·下册）}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+% ==================== 原题 ====================
+\section*{题目}
+\fbox{%
+  \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+    计算下列对弧长的曲线积分：
+    \[
+    \oint_L (x^2 + y^2)\, ds,
+    \]
+    其中 $L$ 为曲线\;
+    $x = a(\cos t + t\sin t),\;
+     y = a(\sin t - t\cos t)$
+    \;$(0 \leq t \leq 2\pi)$。%
+  }%
+}
+\bigskip
+
+% ==================== 曲线背景 ====================
+\section*{曲线背景}
+
+本题中的曲线是\textbf{圆的渐开线}（involute of a circle）。设想将一根绕在半径为 $a$ 的圆盘上的
+细线逐渐展开，线端点的轨迹即为该曲线。参数 $t$ 从 $0$ 到 $2\pi$ 对应渐开线的第一圈。
+
+% ==================== 解答 ====================
+\section*{解答}
+
+\begin{remark}
+  ~
+\end{remark}
+
+\medskip
+
+\noindent\textbf{步骤1：求导以计算弧长微元 $ds$}
+
+已知参数方程：
+\[
+x(t) = a(\cos t + t\sin t),\qquad
+y(t) = a(\sin t - t\cos t).
+\]
+
+对 $t$ 求导：
+\[
+\begin{aligned}
+x'(t) &= a\bigl(-\sin t + \sin t + t\cos t\bigr) = a\, t\cos t,\\[4pt]
+y'(t) &= a\bigl(\cos t - \cos t + t\sin t\bigr) = a\, t\sin t.
+\end{aligned}
+\]
+
+（该求导过程极为简洁---这正是圆的渐开线弧长计算简便的原因。）
+
+\[
+\begin{aligned}
+ds &= \sqrt{\bigl[x'(t)\bigr]^2 + \bigl[y'(t)\bigr]^2}\; dt \\[4pt]
+   &= \sqrt{(a\,t\cos t)^2 + (a\,t\sin t)^2}\; dt \\[4pt]
+   &= \sqrt{a^2 t^2 (\cos^2 t + \sin^2 t)}\; dt \\[4pt]
+   &= \sqrt{a^2 t^2}\; dt \\[4pt]
+   &= a\,|t|\, dt \quad \xrightarrow{t \geq 0}\quad a t\, dt.
+\end{aligned}
+\]
+
+\medskip
+
+\noindent\textbf{步骤2：化简被积函数 $x^2 + y^2$}
+
+\[
+\begin{aligned}
+x^2 + y^2 &= a^2(\cos t + t\sin t)^2 + a^2(\sin t - t\cos t)^2 \\[4pt]
+          &= a^2\Bigl[(\cos^2 t + 2t\cos t\sin t + t^2\sin^2 t)
+                   + (\sin^2 t - 2t\sin t\cos t + t^2\cos^2 t)\Bigr] \\[4pt]
+          &= a^2\Bigl[(\cos^2 t + \sin^2 t) + t^2(\sin^2 t + \cos^2 t)
+                   + \cancel{2t\cos t\sin t - 2t\sin t\cos t}\Bigr] \\[4pt]
+          &= a^2(1 + t^2).
+\end{aligned}
+\]
+
+\textbf{技巧提示：} 交叉项 $2t\cos t\sin t$ 与 $-2t\sin t\cos t$ 恰好抵消，
+这正是圆的渐开线方程的美妙之处。
+
+\medskip
+
+\noindent\textbf{步骤3：代入弧长积分公式并计算定积分}
+
+\[
+\begin{aligned}
+\oint_L (x^2 + y^2)\, ds
+   &= \int_0^{2\pi} a^2(1 + t^2) \cdot a t\, dt \\[4pt]
+   &= a^3 \int_0^{2\pi} \bigl(t + t^3\bigr)\, dt \\[4pt]
+   &= a^3 \left[ \frac{t^2}{2} + \frac{t^4}{4} \right]_0^{2\pi} \\[4pt]
+   &= a^3 \left( \frac{(2\pi)^2}{2} + \frac{(2\pi)^4}{4} \right) \\[4pt]
+   &= a^3 \left( \frac{4\pi^2}{2} + \frac{16\pi^4}{4} \right) \\[4pt]
+   &= a^3 \bigl( 2\pi^2 + 4\pi^4 \bigr).
+\end{aligned}
+\]
+
+\bigskip
+
+\answerbox{$\displaystyle \oint_L (x^2 + y^2)\, ds = 2\pi^2 a^3 \bigl(1 + 2\pi^2\bigr)$}
+
+\bigskip
+
+% ==================== 总结 ====================
+\section*{方法小结}
+
+本题的解题过程与教材例1、例2完全一致，遵循对弧长曲线积分的标准三步法：
+
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item \textbf{求导得 $ds$：} $x'(t),y'(t) \;\to\; ds = \sqrt{(x')^2+(y')^2}\,dt$
+  \item \textbf{代入被积函数：} 用参数 $t$ 表达 $f(x,y)$
+  \item \textbf{化定积分计算：} $\displaystyle \int_\alpha^\beta f(x(t),y(t))\, ds$
+\end{enumerate}
+
+本题的\textbf{核心技巧}在于化简 $x^2+y^2$ 时交叉项恰好抵消为 $a^2(1+t^2)$，
+以及 $ds = at\,dt$ 的简洁形式，两者结合使最终积分仅涉及多项式 $t+t^3$。
+这正是命题人选择圆的渐开线来考查本节知识的原因。
+
+\end{document}

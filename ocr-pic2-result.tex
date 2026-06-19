@@ -1,0 +1,77 @@
+\documentclass[14pt,a4paper]{ctexart}
+
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{OCR 识别结果 —— 待确认}}
+\fancyhead[R]{\textbf{pic2.jpg}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+
+\begin{document}
+
+\section*{OCR 原始输出}
+
+\begin{center}
+\fbox{%
+\parbox{0.85\textwidth}{\ttfamily\small
+1. 计算 | czy ~~Dadz~~ =zydy , 其中分别 为 由点 和 GT,0) 到点 Bo'22 的 T 线 有 \\[4pt]
+(1) 线段 到 元 可二 2 \\[4pt]
+(2) 抛物 线 4z 二 48 \\[4pt]
+(3) 椭圆 弧 4z? 交一 4
+}%
+}
+\end{center}
+
+\section*{推测题目（请核对原图）}
+
+\bigskip
+
+\fbox{%
+\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{习题}. 计算对坐标的曲线积分，其中 $L$ 分别为由点 $A(1,0)$ 到点 $B(0,2)$
+的下列弧段：
+
+\begin{enumerate}
+  \item[(1)] 线段 $AB$：$2x + y = 2$
+  \item[(2)] 抛物线弧：$4x + y^2 = 4$
+  \item[(3)] 椭圆弧：$4x^2 + y^2 = 4$
+\end{enumerate}
+}%
+}
+
+\bigskip
+
+\noindent\textbf{被积函数（两种可能，请确认是哪一种）：}
+
+\begin{center}
+\renewcommand{\arraystretch}{2.2}
+\begin{tabular}{|c|c|}
+  \hline
+  \textbf{选项 A} &
+  $\displaystyle\int_L 2xy\,dx + x^2\,dy$
+  （是 $d(x^2y)$ 的全微分，三路径结果必相同）\\
+  \hline
+  \textbf{选项 B} &
+  $\displaystyle\int_L xy\,dx + x^2y\,dy$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\begin{center}
+\Large\color{red}
+\textbf{请对照原图确认：}
+\begin{enumerate}
+  \item 被积函数是 A 还是 B（或都不是）？
+  \item 三个曲线方程是否正确？
+\end{enumerate}
+确认后我会立即解答。
+\end{center}
+
+\end{document}

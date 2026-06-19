@@ -1,0 +1,294 @@
+\documentclass[12pt,a4paper]{ctexart}
+
+% ===== 页面设置 =====
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+
+% ===== 页眉页脚 =====
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{高等数学（第七版·下册）}}
+\fancyhead[R]{\textbf{习题11-1 第3题(1)}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+
+% ===== 自定义环境 =====
+\newtheoremstyle{myremark}
+  {0.5\topsep}    % 上方间距
+  {0.5\topsep}    % 下方间距
+  {\normalfont}   % 正文字体
+  {}              % 缩进
+  {\bfseries\color{blue!60!black}} % 标题字体
+  {：}            % 标题后标点
+  {0.5em}         % 标题后间距
+  {}              % 标题规格
+
+\theoremstyle{myremark}
+\newtheorem*{method}{方法}
+
+% 方框答案
+\newcommand{\answerbox}[1]{%
+  \begin{center}
+  \fbox{\color{red}\large\bfseries #1}
+  \end{center}
+}
+
+% ===== 文档信息 =====
+\title{\Huge\bfseries 习题11-1~~第3题(1) 多解全析}
+\author{高等数学（同济大学数学系~编·第七版·下册）}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+% ==================== 原题 ====================
+\section*{题目}
+\fbox{%
+  \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+    计算下列对弧长的曲线积分：
+    \[
+    \oint_L (x^2 + y^2)^n \, ds
+    \]
+    其中 $L$ 为圆周 $\,x = a\cos t,\; y = a\sin t \;(0 \leq t \leq 2\pi)$。%
+  }%
+}
+\bigskip
+
+本题的被积函数 $f(x,y)=(x^2+y^2)^n$ 在圆周上恒为常数 $a^{2n}$，这是解题的关键。
+下面用\textbf{四种不同方法}求解，从不同角度理解第一类曲线积分的计算思想。
+
+% ==================== 方法一 ====================
+\section*{\textcolor{blue!70!black}{方法一：标准参数方程法}}
+
+\begin{method}[基本思路]
+  将曲线参数方程直接代入弧长积分公式，化为定积分计算。
+  这是教材\S11.1中公式(1-1)的标准用法。
+\end{method}
+
+\medskip
+\textbf{已知：} 圆周 $L$ 的参数方程为
+\[
+x = a\cos t,\quad y = a\sin t,\quad 0 \leq t \leq 2\pi.
+\]
+
+\noindent\textbf{步骤1：计算弧长微元 $ds$}
+\[
+\frac{dx}{dt} = -a\sin t,\qquad \frac{dy}{dt} = a\cos t
+\]
+\[
+ds = \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2}\, dt
+     = \sqrt{(-a\sin t)^2 + (a\cos t)^2}\, dt
+     = \sqrt{a^2(\sin^2 t + \cos^2 t)}\, dt
+     = a\, dt.
+\]
+
+\noindent\textbf{步骤2：化简被积函数}
+\[
+x^2 + y^2 = (a\cos t)^2 + (a\sin t)^2 = a^2(\cos^2 t + \sin^2 t) = a^2.
+\]
+\[
+\therefore\ (x^2 + y^2)^n = (a^2)^n = a^{2n}.
+\]
+
+\noindent\textbf{步骤3：化为定积分}
+\[
+\oint_L (x^2 + y^2)^n \, ds
+   = \int_0^{2\pi} a^{2n} \cdot a \, dt
+   = a^{2n+1} \int_0^{2\pi} dt.
+\]
+
+\noindent\textbf{步骤4：计算定积分}
+\[
+\int_0^{2\pi} dt = 2\pi.
+\]
+
+\answerbox{$\displaystyle \oint_L (x^2 + y^2)^n \, ds = 2\pi a^{2n+1}$}
+
+\bigskip
+
+% ==================== 方法二 ====================
+\section*{\textcolor{blue!70!black}{方法二：极坐标直接代入法}}
+
+\begin{method}[基本思路]
+  圆的极坐标方程为 $r=a$（常数），弧长微元在极坐标下为
+  $ds = \sqrt{r^2 + (r')^2}\,d\theta$。直接将极坐标形式代入计算。
+\end{method}
+
+\medskip
+\textbf{已知：} 圆周 $L$ 的极坐标方程为
+\[
+r(\theta) = a,\quad 0 \leq \theta \leq 2\pi.
+\]
+
+\noindent\textbf{步骤1：极坐标下的弧长微元}
+\[
+r'(\theta) = \frac{dr}{d\theta} = 0.
+\]
+\[
+ds = \sqrt{\big[r(\theta)\big]^2 + \big[r'(\theta)\big]^2}\, d\theta
+     = \sqrt{a^2 + 0}\, d\theta
+     = a\, d\theta.
+\]
+
+\noindent\textbf{步骤2：极坐标下的被积函数}
+\[
+x^2 + y^2 = r^2 = a^2.
+\]
+\[
+\therefore\ (x^2 + y^2)^n = a^{2n}.
+\]
+
+\noindent\textbf{步骤3：代入积分}
+\[
+\oint_L (x^2 + y^2)^n \, ds
+   = \int_0^{2\pi} a^{2n} \cdot a\, d\theta
+   = a^{2n+1} \int_0^{2\pi} d\theta
+   = 2\pi a^{2n+1}.
+\]
+
+\answerbox{$\displaystyle \oint_L (x^2 + y^2)^n \, ds = 2\pi a^{2n+1}$}
+
+\bigskip
+
+% ==================== 方法三 ====================
+\section*{\textcolor{blue!70!black}{方法三：弧长参数法（自然参数法）}}
+
+\begin{method}[基本思路]
+  以弧长 $s$ 本身为参数。在圆周上，弧长 $s$ 从 $0$ 变到 $2\pi a$（即圆的周长）。
+  被积函数只依赖于 $x^2+y^2$，在圆上恒为常数，可直接提取到积分号外。
+\end{method}
+
+\medskip
+\textbf{已知：} 圆周 $L$ 的半径为 $a$，总弧长（周长）为 $L_{\text{总}} = 2\pi a$。
+
+\noindent\textbf{步骤1：注意到被积函数在 $L$ 上为常数}
+\[
+\forall (x,y) \in L:\ x^2 + y^2 = a^2 \quad\Longrightarrow\quad (x^2 + y^2)^n = a^{2n}.
+\]
+
+\noindent\textbf{步骤2：利用第一类曲线积分的性质}
+第一类曲线积分满足：
+\[
+\oint_L k \cdot f(x,y)\, ds = k \oint_L f(x,y)\, ds \quad (k\text{ 为常数}).
+\]
+
+特别地，当 $f(x,y) \equiv 1$ 时，积分值等于曲线的弧长：
+\[
+\oint_L 1\, ds = \text{曲线 } L \text{ 的弧长}.
+\]
+
+\noindent\textbf{步骤3：直接计算}
+\[
+\oint_L (x^2 + y^2)^n \, ds
+   = \oint_L a^{2n}\, ds
+   = a^{2n} \oint_L 1\, ds
+   = a^{2n} \cdot (\text{圆周长})
+   = a^{2n} \cdot 2\pi a
+   = 2\pi a^{2n+1}.
+\]
+
+\answerbox{$\displaystyle \oint_L (x^2 + y^2)^n \, ds = 2\pi a^{2n+1}$}
+
+\bigskip
+
+% ==================== 方法四 ====================
+\section*{\textcolor{blue!70!black}{方法四：对称性分析法}}
+
+\begin{method}[基本思路]
+  利用圆的旋转对称性，将积分转化为更简单的形式。
+  尽管本题中这个方法的优势不如前三种明显，但它体现了对称性思想在积分中的重要地位。
+\end{method}
+
+\medskip
+\textbf{已知：} 圆周 $L$ 具有旋转对称性，关于 $x$ 轴、$y$ 轴都对称。
+
+\noindent\textbf{步骤1：参数方程下的直接验证}
+
+取参数表示 $x = a\cos t,\ y = a\sin t$。将积分区间 $[0, 2\pi]$ 分为四等份：
+\[
+I = \oint_L (x^2+y^2)^n ds = \int_0^{\frac{\pi}{2}} + \int_{\frac{\pi}{2}}^{\pi}
+    + \int_\pi^{\frac{3\pi}{2}} + \int_{\frac{3\pi}{2}}^{2\pi}.
+\]
+
+\noindent\textbf{步骤2：每段积分值相同}
+
+在每一段上，$ds = a\,dt$，$x^2+y^2 = a^2$，因此每段积分为：
+\[
+I_k = \int_{(k-1)\frac{\pi}{2}}^{k\frac{\pi}{2}} a^{2n} \cdot a\, dt = a^{2n+1} \cdot \frac{\pi}{2}.
+\]
+
+\noindent\textbf{步骤3：四段相加}
+\[
+I = 4 \times a^{2n+1} \cdot \frac{\pi}{2} = 2\pi a^{2n+1}.
+\]
+
+\answerbox{$\displaystyle \oint_L (x^2 + y^2)^n \, ds = 2\pi a^{2n+1}$}
+
+\bigskip
+
+% ==================== 方法对比 ====================
+\section*{四种方法对比总结}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  \textbf{方法} & \textbf{核心思想} & \textbf{难度} & \textbf{适用场景} \\
+  \hline
+  方法一 & 参数方程直接代入 & $\star$ & 通用方法，适用于任何参数曲线 \\
+  \hline
+  方法二 & 极坐标形式代入 & $\star$ & 圆、心形线等极坐标曲线 \\
+  \hline
+  方法三 & 利用被积函数为常数的特性 & $\star$ & 当 $f(x,y)$ 在曲线上恒为常数时 \\
+  \hline
+  方法四 & 对称性分段计算 & $\star\star$ & 对称区域上的积分验证 \\
+  \hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\noindent\textbf{结论：} 四种方法殊途同归，均得到 $\boxed{2\pi a^{2n+1}}$。
+其中，\textcolor{red}{方法三} 最为简洁，因为它直接抓住了问题的本质——
+被积函数 $(x^2+y^2)^n$ 在整个圆周上恒等于 $a^{2n}$，
+无需任何参数代换即可直接提取常数。这个技巧在曲线积分和曲面积分中都非常实用。
+
+% ==================== 推广思考 ====================
+\section*{延伸思考}
+
+\begin{enumerate}[leftmargin=*]
+
+  \item \textbf{若 $n$ 不是整数？}
+
+  本题中的 $n$ 未作特定限制。当 $n$ 为任意实数时，上述推导依然成立，
+  因为关键步骤仅依赖于 $x^2+y^2=a^2$ 恒成立，与 $n$ 的具体取值无关。
+
+  \item \textbf{若曲线不是完整的圆？}
+
+  若 $L$ 仅为圆弧（对应参数区间 $[\alpha, \beta]$），则结果为：
+  \[
+  \int_L (x^2+y^2)^n ds = a^{2n+1}(\beta - \alpha).
+  \]
+  这是因为每一步的推导中，只有积分区间发生了变化。
+
+  \item \textbf{与二重积分的联系}
+
+  若将本题与第十章的二重积分对比：
+  \[
+  \iint_D (x^2+y^2)^n \,dxdy \quad (D: x^2+y^2 \leq a^2),
+  \]
+  后者需要用极坐标变换 $dxdy = r\,dr\,d\theta$，结果为 $\frac{2\pi a^{2n+2}}{2n+2}$（当 $n > -1$）。
+  注意曲线积分是 $2\pi a^{2n+1}$（一次方），二重积分是 $\frac{2\pi a^{2n+2}}{2n+2}$（二次方），
+  体现了\textbf{降维积分}与\textbf{区域积分}的本质区别。
+
+\end{enumerate}
+
+\end{document}

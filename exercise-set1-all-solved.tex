@@ -1,0 +1,371 @@
+\documentclass[12pt,a4paper]{ctexart}
+
+% ===== 页面设置 =====
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+% ===== 页眉页脚 =====
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{曲线积分习题全解}}
+\fancyhead[R]{\textbf{ocr-pic-set1}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+
+% ===== 答案框 =====
+\newcommand{\answerbox}[1]{%
+  \begin{center}
+  \fbox{\color{red}\large\bfseries #1}
+  \end{center}
+}
+
+% ===== 紧凑节标题 =====
+\titleformat{\section}[hang]{\Large\bfseries}{}{0pt}{}
+
+\begin{document}
+
+\begin{center}
+{\Huge\bfseries 曲线积分习题全解}
+
+\bigskip
+{\large 高等数学（同济大学数学系~编·第七版·下册）\S11.2}
+\end{center}
+
+\vspace{12pt}
+\hrule
+\vspace{12pt}
+
+% ===================================================================
+\section{图1：直线段上的对坐标曲线积分}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{题目：}计算 $\displaystyle I = \int_L x\sin y\,dx - y\sin x\,dy$，
+$L$ 为从 $A(\pi,0)$ 到 $B(0,\pi)$ 的直线段。}}
+
+\bigskip
+
+\noindent\textbf{参数化：} 直线 $AB$ 的方程为 $x+y=\pi$。
+令 $x = t$，则 $y = \pi - t$。
+\[
+t: \pi \to 0,\qquad dx = dt,\quad dy = -dt.
+\]
+
+\noindent\textbf{代入：}
+\[
+\begin{aligned}
+I &= \int_{\pi}^0 \bigl[t\sin(\pi-t)\bigr]\,dt \;-\; \bigl[(\pi-t)\sin t\bigr](-dt) \\[4pt]
+  &= \int_{\pi}^0 \bigl[t\underbrace{\sin(\pi-t)}_{=\sin t} + (\pi-t)\sin t\bigr]\,dt \\[4pt]
+  &= \int_{\pi}^0 \bigl[t\sin t + \pi\sin t - t\sin t\bigr]\,dt \\[4pt]
+  &= \int_{\pi}^0 \pi\sin t\,dt
+   = \pi\Bigl[-\cos t\Bigr]_{\pi}^0
+   = \pi\bigl[(-1) - (1)\bigr]
+   = -2\pi.
+\end{aligned}
+\]
+
+\answerbox{$I = -2\pi$}
+
+% ===================================================================
+\newpage
+\section{图2-3：格林公式——逆时针闭路积分}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{题目：}计算 $\displaystyle I = \oint_L (2xy - x^2)\,dx + (x + y^2)\,dy$，
+$L$ 为 $y^2=x$ 与 $y=x^2$ 所围区域边界，\textbf{逆时针}方向。}}
+
+\bigskip
+
+\noindent\textbf{方法：格林公式}
+\[
+\oint_L P\,dx+Q\,dy = \iint_D \Bigl(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\Bigr)\,dxdy
+\]
+
+\[
+P = 2xy - x^2,\quad \frac{\partial P}{\partial y} = 2x;\qquad
+Q = x + y^2,\quad \frac{\partial Q}{\partial x} = 1.
+\]
+\[
+\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} = 1 - 2x.
+\]
+
+\noindent\textbf{区域 $D$：} 两曲线交于 $(0,0)$ 和 $(1,1)$。
+$y=x^2$（下方）与 $y=\sqrt{x}$（上方，来自 $y^2=x,\;y>0$）。
+\[
+D: 0 \leq x \leq 1,\quad x^2 \leq y \leq \sqrt{x}.
+\]
+
+\[
+\begin{aligned}
+I &= \iint_D (1-2x)\,dxdy
+   = \int_0^1 \int_{x^2}^{\sqrt{x}} (1-2x)\,dy\,dx \\[4pt]
+  &= \int_0^1 (1-2x)(\sqrt{x} - x^2)\,dx \\[4pt]
+  &= \int_0^1 \bigl(x^{1/2} - x^2 - 2x^{3/2} + 2x^3\bigr)\,dx \\[4pt]
+  &= \Bigl[\frac{2}{3}x^{3/2} - \frac{1}{3}x^3 - \frac{4}{5}x^{5/2} + \frac{1}{2}x^4\Bigr]_0^1 \\[4pt]
+  &= \frac{2}{3} - \frac{1}{3} - \frac{4}{5} + \frac{1}{2}
+   = \frac{20-10-24+15}{30}
+   = \frac{1}{30}.
+\end{aligned}
+\]
+
+\answerbox{$I = \dfrac{1}{30}$}
+
+% ===================================================================
+\newpage
+\section{图2-4：摆线弧段}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{题目：}计算 $\displaystyle I = \int_L (2a-y)\,dx + x\,dy$，
+$L$ 为摆线 $x=a(t-\sin t),\; y=a(1-\cos t)$，$t:0\to2\pi$。}}
+
+\bigskip
+
+\noindent\textbf{参数化：}
+\[
+dx = a(1-\cos t)\,dt,\qquad dy = a\sin t\,dt.
+\]
+
+\[
+\begin{aligned}
+I &= \int_0^{2\pi} \bigl[2a - a(1-\cos t)\bigr] \cdot a(1-\cos t)\,dt
+    \;+\; a(t-\sin t) \cdot a\sin t\,dt \\[4pt]
+  &= \int_0^{2\pi} \bigl[a(1+\cos t) \cdot a(1-\cos t) + a^2(t-\sin t)\sin t\bigr]\,dt \\[4pt]
+  &= a^2\int_0^{2\pi} \bigl[(1-\cos^2 t) + t\sin t - \sin^2 t\bigr]\,dt \\[4pt]
+  &= a^2\int_0^{2\pi} \bigl[\cancel{\sin^2 t} + t\sin t - \cancel{\sin^2 t}\bigr]\,dt \\[4pt]
+  &= a^2\int_0^{2\pi} t\sin t\,dt.
+\end{aligned}
+\]
+
+\noindent\textbf{分部积分：} $\int t\sin t\,dt = -t\cos t + \sin t + C$。
+
+\[
+I = a^2\Bigl[-t\cos t + \sin t\Bigr]_0^{2\pi}
+   = a^2\bigl[(-2\pi\cdot 1 + 0) - (0 + 0)\bigr]
+   = -2\pi a^2.
+\]
+
+\answerbox{$I = -2\pi a^2$}
+
+% ===================================================================
+\newpage
+\section{图2-5：空间螺旋线}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{题目：}计算 $\displaystyle I = \int_L y\,dx + z\,dy + x\,dz$，
+$L$ 为螺旋线 $x=a\cos t,\; y=a\sin t,\; z=bt$，$t:0\to2\pi$。}}
+
+\bigskip
+
+\noindent\textbf{参数化：}
+\[
+dx = -a\sin t\,dt,\quad dy = a\cos t\,dt,\quad dz = b\,dt.
+\]
+
+\[
+\begin{aligned}
+I &= \int_0^{2\pi} \bigl[a\sin t(-a\sin t) + bt(a\cos t) + a\cos t\cdot b\bigr]\,dt \\[4pt]
+  &= \int_0^{2\pi} \bigl[-a^2\sin^2 t + abt\cos t + ab\cos t\bigr]\,dt \\[4pt]
+  &= -a^2\underbrace{\int_0^{2\pi}\sin^2 t\,dt}_{=\pi}
+     \;+\; ab\underbrace{\int_0^{2\pi}\cos t\,dt}_{=0}
+     \;+\; ab\underbrace{\int_0^{2\pi}t\cos t\,dt}_{\text{分部积分}=0}.
+\end{aligned}
+\]
+
+\noindent\textbf{说明：} $\int_0^{2\pi} t\cos t\,dt = [t\sin t+\cos t]_0^{2\pi} = (0+1)-(0+1)=0$。
+
+\[
+I = -\pi a^2.
+\]
+
+\answerbox{$I = -\pi a^2$}
+
+% ===================================================================
+\newpage
+\section{图2-6：空间曲线（$y=x^2,\;z=x^3$）}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{题目：}计算 $\displaystyle I = \int_L (y^2-z^2)\,dx + 2yz\,dy - x^2\,dz$，
+$L$ 为 $\begin{cases}y=x^2\\z=x^3\end{cases}$，从 $(0,0,0)$ 到 $(1,1,1)$。}}
+
+\bigskip
+
+\noindent\textbf{参数化：} 以 $x$ 为参数，$x=t$，则 $y=t^2,\;z=t^3$，$t:0\to1$。
+
+\[
+dx = dt,\quad dy = 2t\,dt,\quad dz = 3t^2\,dt.
+\]
+
+\[
+\begin{aligned}
+I &= \int_0^1 \bigl[(t^4 - t^6)\cdot 1 + 2t^2\cdot t^3\cdot 2t - t^2\cdot 3t^2\bigr]\,dt \\[4pt]
+  &= \int_0^1 \bigl[t^4 - t^6 + 4t^6 - 3t^4\bigr]\,dt \\[4pt]
+  &= \int_0^1 \bigl(3t^6 - 2t^4\bigr)\,dt \\[4pt]
+  &= \Bigl[\frac{3}{7}t^7 - \frac{2}{5}t^5\Bigr]_0^1 \\[4pt]
+  &= \frac{3}{7} - \frac{2}{5}
+   = \frac{15 - 14}{35}
+   = \frac{1}{35}.
+\end{aligned}
+\]
+
+\answerbox{$I = \dfrac{1}{35}$}
+
+% ===================================================================
+\newpage
+\section{图3-1：变力沿曲线做功}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{题目：}力场 $\vec{F}=(0,-x^2)$（方向为 $y$ 轴负方向，大小为 $x^2$）。
+质点沿 $1-x=y^2$ 从 $(1,0)$ 移动到 $(0,1)$，求力场所做的功。}}
+
+\bigskip
+
+\noindent\textbf{功的曲线积分公式：}
+\[
+W = \int_L \vec{F}\cdot d\vec{r} = \int_L 0\cdot dx + (-x^2)\,dy = -\int_L x^2\,dy.
+\]
+
+\noindent\textbf{路径参数化：} $1-x=y^2 \;\Rightarrow\; x = 1-y^2$，$y:0\to1$。
+
+\[
+\begin{aligned}
+W &= -\int_0^1 (1-y^2)^2\,dy
+   = -\int_0^1 (1 - 2y^2 + y^4)\,dy \\[4pt]
+  &= -\Bigl[y - \frac{2}{3}y^3 + \frac{1}{5}y^5\Bigr]_0^1 \\[4pt]
+  &= -\Bigl(1 - \frac{2}{3} + \frac{1}{5}\Bigr)
+   = -\frac{15 - 10 + 3}{15}
+   = -\frac{8}{15}.
+\end{aligned}
+\]
+
+\answerbox{$W = -\dfrac{8}{15}$}
+
+（质量 $m$ 不影响功的计算——功仅由力场和路径决定。）
+
+% ===================================================================
+\newpage
+\section{图3-2：利用曲线方程化简化为 $f(x)dx+g(y)dy$ 型}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{题目：}将 $\displaystyle I = \int_L \bigl[1+(xy+y^2)\sin x\bigr]dx
+   + \bigl[(x^2+xy)\sin y\bigr]dy$
+化为 $\int_L f(x)dx+g(y)dy$ 并计算。
+$L$ 为上半椭圆 $x^2+xy+y^2=1$，从 $(-1,0)$ 到 $(1,0)$。}}
+
+\bigskip
+
+\noindent\textbf{核心技巧：在曲线上 $x^2+xy+y^2=1$，故 $xy = 1 - x^2 - y^2$。}
+
+\medskip
+\noindent\textbf{化简 $dx$ 的被积函数：}
+\[
+xy + y^2 = (1 - x^2 - y^2) + y^2 = 1 - x^2.
+\]
+\[
+\therefore\; [1 + (xy+y^2)\sin x] = 1 + (1-x^2)\sin x \;\equiv\; f(x).
+\]
+
+\noindent\textbf{化简 $dy$ 的被积函数：}
+\[
+x^2 + xy = x^2 + (1 - x^2 - y^2) = 1 - y^2.
+\]
+\[
+\therefore\; [(x^2+xy)\sin y] = (1-y^2)\sin y \;\equiv\; g(y).
+\]
+
+\noindent\textbf{因此原积分化为：}
+\[
+I = \int_L \underbrace{\bigl[1 + (1-x^2)\sin x\bigr]}_{f(x)}\,dx
+      \;+\; \underbrace{\bigl[(1-y^2)\sin y\bigr]}_{g(y)}\,dy.
+\]
+
+\noindent\textbf{计算：} $f(x)dx+g(y)dy$ 是恰当微分（路径无关），故可沿 $x$ 轴直接积分：
+\[
+\begin{aligned}
+I &= \int_{-1}^1 f(x)\,dx + \int_0^0 g(y)\,dy
+   = \int_{-1}^1 \bigl[1 + (1-x^2)\sin x\bigr]\,dx \\[4pt]
+  &= \int_{-1}^1 1\,dx \;+\; \int_{-1}^1 \underbrace{\sin x}_{\text{奇函数}}\,dx
+     \;-\; \int_{-1}^1 \underbrace{x^2\sin x}_{\text{奇函数}}\,dx \\[4pt]
+  &= 2 + 0 - 0 = 2.
+\end{aligned}
+\]
+
+\answerbox{$I = 2$}
+
+\medskip
+\color{blue!70!black}
+\textbf{点睛：} 本题的关键是用曲线方程 $xy=1-x^2-y^2$ 消去被积函数中的交叉项，
+将 $P(x,y)$ 和 $Q(x,y)$ 分别化为仅含 $x$ 和仅含 $y$ 的函数。
+这是对坐标曲线积分中一种重要的化简技巧。
+\color{black}
+
+% ===================================================================
+\newpage
+\section{图3-3：将对坐标的曲线积分化为对弧长的曲线积分}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{题目：}将下列对坐标的曲线积分化为对弧长的曲线积分：\\
+(1) $\displaystyle\int_L 3x^2y\,dx + y^2\,dy$，$L: y^2=x$，$(0,0)\to(1,1)$。\\
+(2) $\displaystyle\int_L P\,dx+Q\,dy+R\,dz$，$L: x=t,y=t^2,z=t^3$，$t:0\to1$。}}
+
+\bigskip
+
+\subsection*{转换公式}
+
+两类曲线积分的转换公式为：
+\[
+\int_L P\,dx+Q\,dy+R\,dz = \int_L \Bigl(P\frac{dx}{ds} + Q\frac{dy}{ds} + R\frac{dz}{ds}\Bigr)\,ds,
+\]
+其中 $(\frac{dx}{ds},\frac{dy}{ds},\frac{dz}{ds})$ 是曲线的单位切向量。
+
+\subsection*{(1)}
+
+\noindent\textbf{参数化：} 由 $y^2=x$，取 $y$ 为参数：$x=y^2,\;y=y$，$y:0\to1$。
+\[
+dx = 2y\,dy,\quad ds = \sqrt{1+(dx/dy)^2}\,dy = \sqrt{1+4y^2}\,dy.
+\]
+
+方向余弦（单位切向量）：
+\[
+\frac{dx}{ds} = \frac{2y}{\sqrt{1+4y^2}},\qquad
+\frac{dy}{ds} = \frac{1}{\sqrt{1+4y^2}}.
+\]
+
+故：
+\[
+\int_L 3x^2y\,dx + y^2\,dy
+   = \int_L \Bigl(3x^2y\cdot\frac{2y}{\sqrt{1+4y^2}}
+                 + y^2\cdot\frac{1}{\sqrt{1+4y^2}}\Bigr)\,ds.
+\]
+
+在曲线 $x=y^2$ 上，$3x^2y = 3y^4\cdot y = 3y^5$，故：
+\[
+\boxed{\int_L 3x^2y\,dx + y^2\,dy
+      = \int_L \frac{6y^6 + y^2}{\sqrt{1+4y^2}}\,ds
+      = \int_L \frac{y^2(6y^4+1)}{\sqrt{1+4y^2}}\,ds.}
+\]
+
+\subsection*{(2)}
+
+\noindent\textbf{参数化：} $x=t,\;y=t^2,\;z=t^3$，$t:0\to1$。
+\[
+ds = \sqrt{(1)^2 + (2t)^2 + (3t^2)^2}\,dt = \sqrt{1+4t^2+9t^4}\,dt.
+\]
+
+方向余弦：
+\[
+\frac{dx}{ds} = \frac{1}{\sqrt{1+4t^2+9t^4}},\quad
+\frac{dy}{ds} = \frac{2t}{\sqrt{1+4t^2+9t^4}},\quad
+\frac{dz}{ds} = \frac{3t^2}{\sqrt{1+4t^2+9t^4}}.
+\]
+
+故：
+\[
+\boxed{\int_L P\,dx+Q\,dy+R\,dz
+      = \int_L \frac{P + 2t\,Q + 3t^2 R}{\sqrt{1+4t^2+9t^4}}\,ds,}
+\]
+其中 $t = x = \sqrt{y} = \sqrt[3]{z}$（用被积函数 $P,Q,R$ 的自变量表达）。
+
+\end{document}

@@ -1,0 +1,217 @@
+\documentclass[12pt,a4paper]{ctexart}
+
+% ===== 页面设置 =====
+\usepackage[top=2.2cm,bottom=2.2cm,left=2.2cm,right=2.2cm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+
+% ===== 页眉页脚 =====
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{高等数学（第七版·下册）\S11.2}}
+\fancyhead[R]{\textbf{对坐标的曲线积分}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+
+\newcommand{\answerbox}[1]{%
+  \begin{center}
+  \fbox{\color{red}\large\bfseries #1}
+  \end{center}
+}
+
+\begin{document}
+
+\title{\Huge\bfseries 习题11-2~~三道路径对比计算}
+\author{高等数学（同济大学数学系~编·第七版·下册）}
+\date{\today}
+\maketitle
+\thispagestyle{fancy}
+
+% ==================== 原题 ====================
+\section*{题目}
+\fbox{%
+\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+计算对坐标的曲线积分：
+\[
+I = \int_L (xy-1)\,dx + x^2y\,dy
+\]
+其中 $L$ 分别为由点 $A(1,0)$ 到点 $B(0,2)$ 的下列弧段：
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
+  \item 线段 $AB$：$2x + y = 2$
+  \item 抛物线弧：$4x + y^2 = 4$
+  \item 椭圆弧：$4x^2 + y^2 = 4$
+\end{enumerate}
+}%
+}
+
+\bigskip
+
+\textbf{注：} 记 $P(x,y)=xy-1$，$Q(x,y)=x^2y$。检查是否与路径无关：
+\[
+\frac{\partial P}{\partial y} = x,\qquad
+\frac{\partial Q}{\partial x} = 2xy,\qquad
+\frac{\partial P}{\partial y} \neq \frac{\partial Q}{\partial x}.
+\]
+积分\textcolor{red}{与路径有关}，三条路径必须分别计算。
+
+% ==================== (1) 线段 ====================
+\section*{(1) 线段 $AB$：$2x + y = 2$}
+
+\medskip
+
+\noindent\textbf{参数化：}
+直线 $2x+y=2$ 过 $A(1,0)$ 和 $B(0,2)$。
+令 $x = t$，则 $y = 2-2t$。当 $t$ 从 $1 \to 0$ 时，点从 $A$ 移到 $B$。
+
+\[
+\begin{aligned}
+x &= t,      &\quad dx &= dt,\\
+y &= 2-2t,   &\quad dy &= -2\,dt,\\
+t &: 1 \to 0.
+\end{aligned}
+\]
+
+\noindent\textbf{代入积分：}
+\[
+\begin{aligned}
+I_1 &= \int_1^0 \Bigl[t(2-2t)-1\Bigr]\,dt \;+\; t^2(2-2t)(-2)\,dt \\[4pt]
+    &= \int_1^0 \Bigl[\,(2t-2t^2-1) \;-\; 2t^2(2-2t)\Bigr]\,dt \\[4pt]
+    &= \int_1^0 \Bigl[\,2t-2t^2-1 \;-\; (4t^2-4t^3)\Bigr]\,dt \\[4pt]
+    &= \int_1^0 \bigl(4t^3 - 6t^2 + 2t - 1\bigr)\,dt \\[4pt]
+    &= \Bigl[\,t^4 - 2t^3 + t^2 - t\,\Bigr]_1^0 \\[4pt]
+    &= (0) - (1-2+1-1) = 1.
+\end{aligned}
+\]
+
+\answerbox{$I_1 = 1$}
+
+% ==================== (2) 抛物线弧 ====================
+\section*{(2) 抛物线弧：$4x + y^2 = 4$}
+
+\medskip
+
+\noindent\textbf{参数化：}
+由 $4x + y^2 = 4$ 解出 $x = 1 - \dfrac{y^2}{4}$。
+以 $y$ 为参数：令 $y = t$，则 $x = 1 - \dfrac{t^2}{4}$。
+
+\[
+\begin{aligned}
+x &= 1 - \frac{t^2}{4}, &\quad dx &= -\frac{t}{2}\,dt,\\[4pt]
+y &= t,                 &\quad dy &= dt,\\
+t &: 0 \to 2 \quad (\text{从 }A\text{ 到 }B).
+\end{aligned}
+\]
+
+\noindent\textbf{代入积分：}
+\[
+\begin{aligned}
+I_2 &= \int_0^2 \Bigl[\Bigl(1-\frac{t^2}{4}\Bigr)t - 1\Bigr]\Bigl(-\frac{t}{2}\Bigr)\,dt
+      \;+\; \Bigl(1-\frac{t^2}{4}\Bigr)^2 t \cdot dt \\[4pt]
+    &= \int_0^2 \Bigl[\underbrace{\Bigl(t-\frac{t^3}{4}-1\Bigr)\Bigl(-\frac{t}{2}\Bigr)}_{\text{第1项}}
+      \;+\; \underbrace{t\Bigl(1-\frac{t^2}{2}+\frac{t^4}{16}\Bigr)}_{\text{第2项}}\Bigr]\,dt \\[4pt]
+    &= \int_0^2 \Bigl[\,\Bigl(-\frac{t^2}{2}+\frac{t^4}{8}+\frac{t}{2}\Bigr)
+      \;+\; \Bigl(t-\frac{t^3}{2}+\frac{t^5}{16}\Bigr)\Bigr]\,dt \\[4pt]
+    &= \int_0^2 \Bigl(\frac{t^5}{16} + \frac{t^4}{8} - \frac{t^3}{2} - \frac{t^2}{2} + \frac{3t}{2}\Bigr)\,dt \\[4pt]
+    &= \Bigl[\,\frac{t^6}{96} + \frac{t^5}{40} - \frac{t^4}{8} - \frac{t^3}{6} + \frac{3t^2}{4}\,\Bigr]_0^2 \\[4pt]
+    &= \frac{64}{96} + \frac{32}{40} - \frac{16}{8} - \frac{8}{6} + \frac{12}{4} \\[4pt]
+    &= \frac{2}{3} + \frac{4}{5} - 2 - \frac{4}{3} + 3 \\[4pt]
+    &= \Bigl(\frac{2}{3}-\frac{4}{3}\Bigr) + \frac{4}{5} + (3-2) \\[4pt]
+    &= -\frac{2}{3} + \frac{4}{5} + 1 \\[4pt]
+    &= \frac{-10 + 12 + 15}{15} = \frac{17}{15}.
+\end{aligned}
+\]
+
+\answerbox{$I_2 = \dfrac{17}{15}$}
+
+% ==================== (3) 椭圆弧 ====================
+\section*{(3) 椭圆弧：$4x^2 + y^2 = 4$}
+
+\medskip
+
+\noindent\textbf{参数化：}
+方程可写为 $\dfrac{x^2}{1} + \dfrac{y^2}{4} = 1$，是椭圆。用参数形式：
+\[
+x = \cos\theta,\qquad y = 2\sin\theta.
+\]
+
+验证：$4\cos^2\theta + 4\sin^2\theta = 4$ ✓
+
+\[
+\begin{aligned}
+A(1,0) &: \cos\theta = 1,\; 2\sin\theta = 0 \;\Rightarrow\; \theta = 0,\\
+B(0,2) &: \cos\theta = 0,\; 2\sin\theta = 2 \;\Rightarrow\; \theta = \frac{\pi}{2}.
+\end{aligned}
+\]
+\[
+dx = -\sin\theta\,d\theta,\qquad dy = 2\cos\theta\,d\theta,\qquad
+\theta: 0 \to \frac{\pi}{2}.
+\]
+
+\noindent\textbf{代入积分：}
+\[
+\begin{aligned}
+I_3 &= \int_0^{\frac{\pi}{2}}
+      \Bigl[(\cos\theta \cdot 2\sin\theta - 1)(-\sin\theta)
+      \;+\; \cos^2\theta \cdot 2\sin\theta \cdot 2\cos\theta\Bigr]\,d\theta \\[4pt]
+    &= \int_0^{\frac{\pi}{2}}
+      \Bigl[-(2\sin\theta\cos\theta - 1)\sin\theta
+      \;+\; 4\cos^3\theta\sin\theta\Bigr]\,d\theta \\[4pt]
+    &= \int_0^{\frac{\pi}{2}}
+      \Bigl[-2\sin^2\theta\cos\theta + \sin\theta + 4\cos^3\theta\sin\theta\Bigr]\,d\theta \\[4pt]
+    &= \underbrace{\int_0^{\frac{\pi}{2}}\sin\theta\,d\theta}_{\textcircled{1}}
+       \;-\; 2\underbrace{\int_0^{\frac{\pi}{2}}\sin^2\theta\cos\theta\,d\theta}_{\textcircled{2}}
+       \;+\; 4\underbrace{\int_0^{\frac{\pi}{2}}\cos^3\theta\sin\theta\,d\theta}_{\textcircled{3}}.
+\end{aligned}
+\]
+
+分别计算三个积分：
+
+\textcircled{1} $\displaystyle\int_0^{\frac{\pi}{2}}\sin\theta\,d\theta
+                     = \bigl[-\cos\theta\bigr]_0^{\frac{\pi}{2}}
+                     = 0 - (-1) = 1.$
+
+\textcircled{2} 令 $u = \sin\theta$，$du = \cos\theta\,d\theta$：
+   $\theta=0 \to u=0,\; \theta=\frac{\pi}{2} \to u=1$，
+   $\displaystyle\int_0^1 u^2\,du = \frac{1}{3}.$
+
+\textcircled{3} 令 $u = \cos\theta$，$du = -\sin\theta\,d\theta$：
+   $\theta=0 \to u=1,\; \theta=\frac{\pi}{2} \to u=0$，
+   $\displaystyle\int_1^0 u^3(-du) = \int_0^1 u^3\,du = \frac{1}{4}.$
+
+\[
+I_3 = 1 - 2 \cdot \frac{1}{3} + 4 \cdot \frac{1}{4}
+     = 1 - \frac{2}{3} + 1
+     = \frac{4}{3}.
+\]
+
+\answerbox{$I_3 = \dfrac{4}{3}$}
+
+% ==================== 总结 ====================
+\section*{总结与对比}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|c|c|c|}
+  \hline
+  \textbf{路径} & \textbf{方程} & \textbf{积分值 $I$} \\
+  \hline
+  (1) 线段      & $2x + y = 2$       & $1$ \\[4pt]
+  \hline
+  (2) 抛物线弧  & $4x + y^2 = 4$     & $\dfrac{17}{15} \approx 1.133$ \\[4pt]
+  \hline
+  (3) 椭圆弧    & $4x^2 + y^2 = 4$  & $\dfrac{4}{3} \approx 1.333$ \\[4pt]
+  \hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{核心认识：} 因为 $\dfrac{\partial P}{\partial y} \neq \dfrac{\partial Q}{\partial x}$，
+该积分与路径有关，三条路径得出三个不同结果。
+若被积函数满足 $\dfrac{\partial P}{\partial y} = \dfrac{\partial Q}{\partial x}$（如全微分 $d(x^2y)$），
+则无论哪条路径结果都相同——这正是下一节格林公式要讨论的内容。
+
+\end{document}

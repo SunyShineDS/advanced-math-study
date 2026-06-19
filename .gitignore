@@ -1,0 +1,63 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# API Keys & secrets
+.env
+*.env
+!example.env
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.synctex(busy)
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.vscode/
+
+# Temp / Cache
+*.pyc
+__pycache__/
+
+# Large data files (not needed, tesseract is replaced by vision skill)
+chi_sim.traineddata
+
+# Already installed skill zip/source
+claude-code-vision-skill-main/
+claude-code-vision-skill-main.zip
+
+# Claude internals (contains local paths)
+.claude/
+
+# Large PDFs / textbooks (not original work)
+*.pdf
+
+# Subject directories (textbook PDFs, PPTs, etc.)
+Books/
+GZSX/
+CZSX/
+高一/
+数学/
+物理/
+化学/
+生物/
+英语/
+语文/

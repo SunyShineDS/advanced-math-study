@@ -1,0 +1,481 @@
+\documentclass[12pt,a4paper]{ctexart}
+\usepackage[top=1.5cm,bottom=1.5cm,left=1.6cm,right=1.6cm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,enumitem,xcolor,fancyhdr,titlesec}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\textbf{曲面积分+空间曲线积分全解}}\fancyhead[R]{\textbf{set3/4/5}}\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+\titleformat{\section}[hang]{\Large\bfseries}{}{0pt}{}
+\newcommand{\answerbox}[1]{\begin{center}\fbox{\color{red}\large\bfseries #1}\end{center}}
+\newcommand{\oiint}{\bigcirc\kern-11pt\iint}
+\begin{document}
+\begin{center}{\Huge\bfseries 曲面积分与空间曲线积分全解}\end{center}
+\vspace{6pt}\hrule\vspace{6pt}
+
+% ===================================================================
+\part*{ocr-pic-set3：对面积的曲面积分}
+% ===================================================================
+
+\section{A1(1) 平面第一卦限}
+
+\fbox{$\iint_\Sigma (z+2x+\frac{4}{3}y)dS,\ \Sigma:\frac{x}{2}+\frac{y}{3}+\frac{z}{4}=1$第一卦限。}
+
+平面 $z=4-2x-\frac{4}{3}y$，$z_x=-2,z_y=-\frac{4}{3}$，
+$dS=\sqrt{1+4+\frac{16}{9}}\,dxdy=\frac{\sqrt{61}}{3}dxdy$。
+
+在$\Sigma$上：$z+2x+\frac{4}{3}y=(4-2x-\frac{4}{3}y)+2x+\frac{4}{3}y=4$。
+
+投影$D:0\le x\le2,0\le y\le3-\frac{3}{2}x$，面积$=\frac12\cdot2\cdot3=3$。
+\[I=4\cdot\frac{\sqrt{61}}{3}\cdot3=4\sqrt{61}.\]
+\answerbox{$4\sqrt{61}$}
+
+\section{A1(2) 平面第一卦限}
+
+\fbox{$\iint_\Sigma\frac{1}{(1+x+y)^2}dS,\ \Sigma:x+y+z=1$第一卦限。}
+
+$z=1-x-y,dS=\sqrt{3}dxdy$。$D:0\le x\le1,0\le y\le1-x$。
+\begin{align*}
+I&=\sqrt{3}\int_0^1\!\!\int_0^{1-x}\frac{1}{(1+x+y)^2}dydx
+   =\sqrt{3}\int_0^1\Bigl[\frac{1}{1+x}-\frac12\Bigr]dx\\
+  &=\sqrt{3}\Bigl[\ln(1+x)-\frac{x}{2}\Bigr]_0^1
+   =\sqrt{3}\Bigl(\ln2-\frac12\Bigr).
+\end{align*}
+\answerbox{$\sqrt{3}(\ln2-\frac12)$}
+
+\section{A1(3) 球面 $z\ge h$}
+
+\fbox{$\iint_\Sigma(x+y+z)dS,\ \Sigma:x^2+y^2+z^2=a^2,z\ge h\;(0<h<a)$。}
+
+$z=\sqrt{a^2-x^2-y^2},dS=\frac{a}{z}dxdy$。投影$D:x^2+y^2\le a^2-h^2$。
+\[I=\iint_D(x+y+z)\frac{a}{z}dxdy=a\iint_D\frac{x+y}{\sqrt{a^2-x^2-y^2}}dxdy+a\iint_D 1\,dxdy.\]
+对称性：$x,y$的积分为0。$I=a\cdot\pi(a^2-h^2)$。
+\answerbox{$\pi a(a^2-h^2)$}
+
+\section{A1(4) 球面被柱面截}
+
+\fbox{$\iint_\Sigma(xy+z^2)dS,\ \Sigma:z=\sqrt{8-x^2-y^2}$在$x^2+y^2\le4$内。}
+
+$dS=\frac{\sqrt{8}}{z}dxdy$。$xy$项对称性抵消。
+\[I=\sqrt{8}\iint_D\sqrt{8-x^2-y^2}\,dxdy
+   =2\sqrt{2}\cdot2\pi\int_0^2 r\sqrt{8-r^2}\,dr.\]
+令$u=8-r^2$：$\int_0^2 r\sqrt{8-r^2}dr=\frac13(16\sqrt{2}-8)$。
+\[I=4\pi\sqrt{2}\cdot\frac13(16\sqrt{2}-8)=\frac{4\pi}{3}(32-8\sqrt{2}).\]
+\answerbox{$\frac{4\pi}{3}(32-8\sqrt{2})$}
+
+\section{A1(5) 圆柱面}
+
+\fbox{$\iint_\Sigma\frac{1}{x^2+y^2+z^2}dS,\ \Sigma:x^2+y^2=R^2,0\le z\le H$。}
+
+参数化：$x=R\cos\theta,y=R\sin\theta,z=z$，$dS=R\,d\theta dz$。
+在圆柱面上$x^2+y^2+z^2=R^2+z^2$。
+\[I=\int_0^{2\pi}\!\!\int_0^H\frac{R}{R^2+z^2}dz\,d\theta
+   =2\pi R\cdot\frac1R\arctan\frac{z}{R}\Big|_0^H
+   =2\pi\arctan\frac{H}{R}.\]
+\answerbox{$2\pi\arctan\frac{H}{R}$}
+
+\section{A2 抛物面壳质量}
+
+\fbox{$z=\frac12(x^2+y^2),0\le z\le1,\rho=z$，求质量。}
+
+$dS=\sqrt{1+x^2+y^2}\,dxdy$。$D:x^2+y^2\le2$。
+\[m=\iint_D\frac12(x^2+y^2)\sqrt{1+x^2+y^2}\,dxdy
+   =\pi\int_0^{\sqrt{2}}r^3\sqrt{1+r^2}\,dr.\]
+令$u=1+r^2$：$m=\frac\pi2\int_1^3(u^{3/2}-u^{1/2})du
+   =\pi\Bigl[\frac{u^{5/2}}5-\frac{u^{3/2}}3\Bigr]_1^3
+   =\pi\Bigl(\frac{4\sqrt3}{5}+\frac2{15}\Bigr).$
+\answerbox{$\pi(\frac{4\sqrt3}{5}+\frac2{15})$}
+
+\section{B1 锥面+平面围成立体表面}
+
+\fbox{$\iint_\Sigma(x^2+y^2)dS$，$\Sigma$为$z=\sqrt{x^2+y^2}$与$z=1$围成立体表面。}
+
+分两部分：锥面$\Sigma_1(z=\sqrt{x^2+y^2},0\le z\le1)$和顶面$\Sigma_2(z=1,x^2+y^2\le1)$。
+
+$\Sigma_1$：$dS=\sqrt{1+\frac{x^2+y^2}{x^2+y^2}}dxdy=\sqrt{2}dxdy$。
+$I_1=\sqrt{2}\iint_{x^2+y^2\le1}(x^2+y^2)dxdy=\sqrt{2}\cdot2\pi\cdot\frac14=\frac{\sqrt2\pi}{2}$。
+
+$\Sigma_2$：$dS=dxdy$（$z=1$平面）。
+$I_2=\iint_{x^2+y^2\le1}(x^2+y^2)dxdy=2\pi\cdot\frac14=\frac\pi2$。
+
+$I=\frac{\sqrt2\pi}{2}+\frac\pi2=\frac\pi2(\sqrt2+1)$。
+\answerbox{$\frac\pi2(\sqrt2+1)$}
+
+\section{B2 球面在柱面内部的表面积}
+
+\fbox{球面$z=\sqrt{a^2-x^2-y^2}$在柱面$x^2+y^2=ax$内部的表面积。}
+
+$dS=\frac{a}{z}dxdy=\frac{a}{\sqrt{a^2-x^2-y^2}}dxdy$。柱面$x^2+y^2=ax$即$(x-\frac a2)^2+y^2=(\frac a2)^2$。
+
+$S=\iint_D\frac{a}{\sqrt{a^2-x^2-y^2}}dxdy$，极坐标：$r\le a\cos\theta,-\frac\pi2\le\theta\le\frac\pi2$。
+\[S=\int_{-\pi/2}^{\pi/2}\!\!\int_0^{a\cos\theta}\frac{a}{\sqrt{a^2-r^2}}r\,dr\,d\theta
+   =a\int_{-\pi/2}^{\pi/2}\Bigl[-\sqrt{a^2-r^2}\Bigr]_0^{a\cos\theta}d\theta\]
+\[=a\int_{-\pi/2}^{\pi/2}(a-a|\sin\theta|)d\theta
+   =2a\int_0^{\pi/2}a(1-\sin\theta)d\theta
+   =2a^2\Bigl[\theta+\cos\theta\Bigr]_0^{\pi/2}
+   =2a^2(\frac\pi2-1).\]
+\answerbox{$a^2(\pi-2)$}
+
+\section{B3 圆柱面+平面围成立体表面的$\iint xdS$}
+
+\fbox{$\oiint_\Sigma x\,dS$，$\Sigma$为$x^2+y^2=4,x+z=2,z=0$围成立体表面。}
+
+三部分：圆柱侧面$\Sigma_1$、斜面$\Sigma_2$、底面$\Sigma_3$。
+
+$\Sigma_1$（$x^2+y^2=4,0\le z\le2-x$）：参数化$x=2\cos\theta,y=2\sin\theta$，$dS=2\,d\theta dz$。
+$I_1=\int_0^{2\pi}\!\!\int_0^{2-2\cos\theta}2\cos\theta\cdot2\,dz\,d\theta
+    =4\int_0^{2\pi}\cos\theta(2-2\cos\theta)d\theta=-8\pi$。
+
+$\Sigma_2$（$x+z=2$即$z=2-x$，$x^2+y^2\le4$）：$dS=\sqrt{1+1}dxdy=\sqrt2dxdy$。
+$I_2=\sqrt2\iint_D x\,dxdy=0$（对称性）。
+
+$\Sigma_3$（$z=0,x^2+y^2\le4$）：$dS=dxdy$。
+$I_3=\iint_D x\,dxdy=0$（对称性）。
+
+$I=-8\pi$。
+\answerbox{$-8\pi$}
+
+\newpage
+% ===================================================================
+\part*{ocr-pic-set4：对坐标的曲面积分}
+% ===================================================================
+
+\section{A1(1) 平面上侧}
+
+\fbox{$\iint_\Sigma z^2dxdy,\ \Sigma:x+y+z=1$第一卦限上侧。}
+
+上侧即法向量与$z$轴正向夹角为锐角。$z=1-x-y$投影$D:0\le x\le1,0\le y\le1-x$（取$+$号）。
+\[I=\iint_D(1-x-y)^2dxdy
+   =\int_0^1\!\!\int_0^{1-x}(1-x-y)^2dydx
+   =\int_0^1\frac{(1-x)^3}{3}dx=\frac1{12}.\]
+\answerbox{$\frac1{12}$}
+
+\section{A1(2) 平面第一卦限上侧}
+
+\fbox{$\iint_\Sigma x\,dydz+z\,dxdy,\ \Sigma:x+y+z=1$第一卦限上侧。}
+
+$dxdy$部分：与A1(1)类似，$z=1-x-y$上侧。
+$\iint_\Sigma z\,dxdy=\iint_D(1-x-y)dxdy=\frac12\cdot\frac12\cdot1=\frac16$。
+
+$dydz$部分：投影到$yz$面，$x=1-y-z$，取前侧($+$号)。
+$D_{yz}:y\ge0,z\ge0,y+z\le1$。
+$\iint_\Sigma x\,dydz=\iint_{D_{yz}}(1-y-z)dydz=\frac16$。
+
+$I=\frac16+\frac16=\frac13$。
+\answerbox{$\frac13$}
+
+\section{A1(3) 球面外侧第一卦限}
+
+\fbox{$\iint_\Sigma x^2dydz+y^2dzdx+z^2dxdy$，$\Sigma$为球面$x^2+y^2+z^2=1$外侧第一卦限。}
+
+由对称性，三项相等。计算$z^2dxdy$项：
+$z=\sqrt{1-x^2-y^2}$，外侧取上侧($+$号)。$D:x^2+y^2\le1,x\ge0,y\ge0$。
+\[\iint_\Sigma z^2dxdy=\iint_D(1-x^2-y^2)dxdy
+   =\int_0^{\pi/2}\!\!\int_0^1(1-r^2)r\,dr\,d\theta
+   =\frac\pi2\cdot\frac14=\frac\pi8.\]
+三项和为$3\cdot\frac\pi8=\frac{3\pi}{8}$。
+\answerbox{$\frac{3\pi}{8}$}
+
+\section{A1(4) 球面外侧部分}
+
+\fbox{$\iint_\Sigma xyz\,dxdz$，$\Sigma:x^2+y^2+z^2=1$外侧$z\ge0,x\ge0$。}
+
+投影到$xz$面：$y=\sqrt{1-x^2-z^2}$，外侧取右侧($+$号)。$D_{xz}:x^2+z^2\le1,x\ge0$。
+\[I=\iint_{D_{xz}}xz\sqrt{1-x^2-z^2}\,dxdz.\]
+极坐标$x=r\cos\theta,z=r\sin\theta$，$0\le r\le1,-\frac\pi2\le\theta\le\frac\pi2$。
+\[I=\int_{-\pi/2}^{\pi/2}\!\!\int_0^1 r\cos\theta\cdot r\sin\theta\cdot\sqrt{1-r^2}\cdot r\,dr\,d\theta.\]
+$\int_{-\pi/2}^{\pi/2}\cos\theta\sin\theta\,d\theta=0$，故$I=0$。
+\answerbox{$0$}
+
+\section{A1(5) 上半球面被柱面截}
+
+\fbox{$\iint_\Sigma z^2dxdy$，$\Sigma$为$z=\sqrt{R^2-x^2-y^2}$被$x^2+y^2=Rx$截后剩余部分上侧。}
+
+投影$D$：$x^2+y^2\le R^2$且$(x-\frac R2)^2+y^2>(\frac R2)^2$（挖去柱内）。
+\[I=\iint_D(R^2-x^2-y^2)dxdy
+   =\int_0^{2\pi}\!\!\int_0^R(R^2-r^2)r\,dr\,d\theta
+    -\int_{-\pi/2}^{\pi/2}\!\!\int_0^{R\cos\theta}(R^2-r^2)r\,dr\,d\theta.\]
+第一项$=2\pi\cdot\frac{R^4}{4}=\frac{\pi R^4}{2}$。
+第二项中$\int_0^{R\cos\theta}(R^2-r^2)r\,dr=\frac{R^4}{2}\cos^2\theta-\frac{R^4}{4}\cos^4\theta$。
+$\int_{-\pi/2}^{\pi/2}(\frac12\cos^2\theta-\frac14\cos^4\theta)d\theta
+   =\frac12\cdot\frac\pi2-\frac14\cdot\frac{3\pi}{8}=\frac\pi4-\frac{3\pi}{32}=\frac{5\pi}{32}$。
+乘$R^4$：$\frac{5\pi R^4}{32}$。
+
+$I=\frac{\pi R^4}{2}-\frac{5\pi R^4}{32}=\frac{11\pi R^4}{32}$。
+\answerbox{$\frac{11\pi R^4}{32}$}
+
+\section{A1(6) 平面第一卦限上侧}
+
+\fbox{$\iint_\Sigma xy\,dydz-x^2dzdx+(x+z)dxdy$，$\Sigma:2x+2y+z=6$第一卦限上侧。}
+
+$z=6-2x-2y$。投影$D:0\le x\le3,0\le y\le3-x$。
+
+$dxdy$项：上侧取$+$，$\iint_D(x+6-2x-2y)dxdy=\iint_D(6-x-2y)dxdy$。
+
+先对$y$积分：$\int_0^{3-x}(6-x-2y)dy=[(6-x)y-y^2]_0^{3-x}=(6-x)(3-x)-(3-x)^2=(3-x)(3)=9-3x$。
+再对$x$：$\int_0^3(9-3x)dx=27-\frac{27}{2}=\frac{27}{2}$。
+
+$dydz$项：投影到$yz$面，$x=3-y-\frac z2$，取$+$。由对称性$=\frac{27}{4}$。
+
+$dzdx$项：投影到$zx$面，$y=3-x-\frac z2$，取$+$。$-\iint(-x^2)dzdx$——此项需仔细计算。
+$-\iint_\Sigma x^2dzdx=-\iint_{D_{zx}}x^2(3-x-\frac z2)\,dzdx$（取下侧？）
+实际上$y=3-x-\frac z2$方向余弦$\cos\beta>0$（上侧→右侧），取正。积分$=-\iint_{D_{zx}}x^2\,dzdx$
+$=-x^2\cdot$面积。面积$=\frac12\cdot3\cdot6=9$。
+平均$x^2$：$\iint x^2 dzdx$ over triangle...
+Let me compute: $D_{zx}: x\ge0,z\ge0,2x+z\le6$ (from $y=3-x-z/2\ge0$).
+$\iint_{D_{zx}} x^2 dzdx = \int_0^3\int_0^{6-2x} x^2 dz dx = \int_0^3 x^2(6-2x)dx = [2x^3-\frac{x^4}{2}]_0^3 = 54-\frac{81}{2} = \frac{27}{2}$.
+
+So $-\iint_\Sigma x^2dzdx = -\frac{27}{2}$.
+
+Hmm, this seems messy. Let me reconsider. The surface is $2x+2y+z=6$ in first octant, upper side. Let me use the formula:
+$\iint_\Sigma P dydz+Q dzdx+R dxdy = \iint_D (-P z_x - Q z_y + R)dxdy$ for upper side (since $\cos\gamma>0$).
+
+Wait actually for a surface $z=f(x,y)$ with upward normal:
+$\iint_\Sigma P dydz+Q dzdx+R dxdy = \iint_D [-P f_x - Q f_y + R]dxdy$
+
+Here $z=6-2x-2y$, $f_x=-2,f_y=-2$.
+$P=xy, Q=-x^2, R=x+z$.
+
+$I = \iint_D [-xy(-2) - (-x^2)(-2) + (x+6-2x-2y)]dxdy$
+$= \iint_D [2xy - 2x^2 + 6 - x - 2y]dxdy$
+$= \int_0^3\int_0^{3-x} (2xy - 2x^2 + 6 - x - 2y)dydx$.
+
+Inner: $\int_0^{3-x} (2xy - 2x^2 + 6 - x - 2y)dy$
+$= [xy^2 - 2x^2y + 6y - xy - y^2]_0^{3-x}$
+$= x(3-x)^2 - 2x^2(3-x) + 6(3-x) - x(3-x) - (3-x)^2$
+$= x(9-6x+x^2) - 6x^2 + 2x^3 + 18-6x - 3x+x^2 - (9-6x+x^2)$
+$= 9x-6x^2+x^3 - 6x^2 + 2x^3 + 18-6x - 3x+x^2 - 9+6x-x^2$
+$= (9x-6x-3x+6x) + (-6x^2-6x^2+x^2-x^2) + (x^3+2x^3) + (18-9)$
+$= 6x - 12x^2 + 3x^3 + 9$.
+
+$\int_0^3 (3x^3-12x^2+6x+9)dx = [\frac{3x^4}{4}-4x^3+3x^2+9x]_0^3$
+$= \frac{243}{4} - 108 + 27 + 27 = \frac{243}{4} - 54 = \frac{243-216}{4} = \frac{27}{4}$.
+
+\answerbox{$\frac{27}{4}$}
+
+\section{A2 化对坐标为对面积}
+
+\fbox{将$\iint_\Sigma P dydz+Q dzdx+R dxdy$化为$\iint_\Sigma(P\cos\alpha+Q\cos\beta+R\cos\gamma)dS$，
+$\Sigma:z=\sqrt{a^2-x^2-y^2}$上侧。}
+
+上侧单位法向量：$\vec n=(\frac{x}{a},\frac{y}{a},\frac{z}{a})$（球面外法向）。
+
+方向余弦：$\cos\alpha=\frac{x}{a},\cos\beta=\frac{y}{a},\cos\gamma=\frac{z}{a}$。
+\[\iint_\Sigma P dydz+Q dzdx+R dxdy
+   =\iint_\Sigma\frac{xP+yQ+zR}{a}\,dS.\]
+\answerbox{$\iint_\Sigma\frac{xP+yQ+zR}{a}dS$}
+
+\section{B1 利用两类曲面积分的联系}
+
+\fbox{$\iint_\Sigma[f+x]dydz+[2f+y]dzdx+[f+z]dxdy$，$\Sigma:x-y+z=1$第四卦限上侧。}
+
+第四卦限：$x>0,y<0,z>0$。上侧法向量$\vec n=(1,-1,1)$（平面$x-y+z=1$的梯度），
+单位化：$\cos\alpha=\frac1{\sqrt3},\cos\beta=-\frac1{\sqrt3},\cos\gamma=\frac1{\sqrt3}$。
+
+利用$\iint_\Sigma P dydz+Q dzdx+R dxdy = \iint_\Sigma(P\cos\alpha+Q\cos\beta+R\cos\gamma)dS$：
+\[I=\iint_\Sigma\Bigl[(f+x)\frac1{\sqrt3}-(2f+y)\frac1{\sqrt3}+(f+z)\frac1{\sqrt3}\Bigr]dS\]
+\[=\frac1{\sqrt3}\iint_\Sigma[(f+x)-(2f+y)+(f+z)]dS
+   =\frac1{\sqrt3}\iint_\Sigma(x-y+z)dS.\]
+在$\Sigma$上$x-y+z=1$：$I=\frac1{\sqrt3}\iint_\Sigma 1\,dS=\frac1{\sqrt3}\cdot$曲面面积。
+
+平面在第一卦限？不，第四卦限。$dS=\sqrt3\,dxdy$。$D_{xy}$：由$x-y+z=1$和$z=0$得$x-y=1$，与$x>0,y<0,z>0$围成三角形区域。
+
+$D$：$y$从$-1$到$0$，$x$从$0$到$1+y$…… 面积$=\frac12$，曲面面积$=\frac{\sqrt3}{2}$。
+$I=\frac1{\sqrt3}\cdot\frac{\sqrt3}{2}=\frac12$。
+\answerbox{$\frac12$}
+
+\section{B2 锥面朝下法向量}
+
+\fbox{$\iint_\Sigma(x^2\cos\alpha+y^2\cos\beta+z^2\cos\gamma)dS$，
+$\Sigma:x^2+y^2=z^2(0\le z\le h)$朝下法向量。}
+
+锥面$z=\sqrt{x^2+y^2}$（下半部分$z=-\sqrt{x^2+y^2}$? 不，$x^2+y^2=z^2$意味着$|z|=\sqrt{x^2+y^2}$，这里$z\ge0$）。朝下意味着法向量指向锥体内部。
+
+直接参数化：$x=r\cos\theta,y=r\sin\theta,z=r$，$0\le r\le h,0\le\theta\le2\pi$。
+
+$dS=\sqrt{2}r\,dr\,d\theta$。朝下法向量$\vec n=(\cos\theta,\sin\theta,-1)/\sqrt2$。
+$\cos\alpha=\frac{\cos\theta}{\sqrt2},\cos\beta=\frac{\sin\theta}{\sqrt2},\cos\gamma=-\frac1{\sqrt2}$。
+
+$I=\iint[r^2\cos^2\theta\cdot\frac{\cos\theta}{\sqrt2}+r^2\sin^2\theta\cdot\frac{\sin\theta}{\sqrt2}+r^2\cdot(-\frac1{\sqrt2})]\sqrt2\,r\,dr\,d\theta$
+$=\int_0^{2\pi}\!\!\int_0^h[r^3\cos^3\theta+r^3\sin^3\theta-r^3]dr\,d\theta$。
+
+$\int_0^{2\pi}\cos^3\theta\,d\theta=0,\int_0^{2\pi}\sin^3\theta\,d\theta=0$。
+$I=\int_0^{2\pi}\!\!\int_0^h(-r^3)dr\,d\theta=-2\pi\cdot\frac{h^4}{4}=-\frac{\pi h^4}{2}$。
+\answerbox{$-\frac{\pi h^4}{2}$}
+
+\newpage
+% ===================================================================
+\part*{ocr-pic-set5：高斯公式 + 空间曲线积分}
+% ===================================================================
+
+\section{A1 锥面+平面外侧}
+
+\fbox{$\oiint_\Sigma(y-z)dydz+(z-x)dzdx+(x-y)dxdy$，
+$\Sigma$为$z=\sqrt{x^2+y^2}$与$z=h$围成立体边界外侧。}
+
+高斯公式：$P=y-z,Q=z-x,R=x-y$。
+$\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}=0+0+0=0$。
+\[I=\iiint_\Omega 0\,dxdydz=0.\]
+\answerbox{$0$}
+
+\section{A2 圆柱面+平面外侧}
+
+\fbox{$\oiint_\Sigma(y-z)dydz+(x-y)dxdy$，$\Sigma$为$x^2+y^2=1,z=0,z=3$围成立体外侧。}
+
+缺$dzdx$项（$Q=0$）。$P=y-z,R=x-y$。
+$\frac{\partial P}{\partial x}+\frac{\partial R}{\partial z}=0+0=0$。
+\[I=\iiint_\Omega 0\,dxdydz=0.\]
+\answerbox{$0$}
+
+\section{A3 抛物面+平面外侧}
+
+\fbox{$\oiint_\Sigma x^2dydz+y^2dzdx+z^2dxdy$，
+$\Sigma$为$z=x^2+y^2$与$z=1$围成立体外侧。}
+
+$P=x^2,Q=y^2,R=z^2$。
+$\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}=2x+2y+2z=2(x+y+z)$。
+
+$\Omega:0\le z\le1,x^2+y^2\le z$。由对称性$\iiint_\Omega x\,dv=\iiint_\Omega y\,dv=0$。
+\[I=2\iiint_\Omega z\,dv=2\int_0^1 z\cdot\pi z\,dz=2\pi\cdot\frac13=\frac{2\pi}{3}.\]
+\answerbox{$\frac{2\pi}{3}$}
+
+\section{B1 锥面+两平面外侧}
+
+\fbox{$\oiint_\Sigma\frac{e^z}{\sqrt{x^2+y^2}}dxdy$，
+$\Sigma$为$z=\sqrt{x^2+y^2},z=1,z=2$围成立体外侧。}
+
+仅$dxdy$项（$R=\frac{e^z}{\sqrt{x^2+y^2}}$）。高斯：
+$I=\iiint_\Omega\frac{\partial}{\partial z}\bigl(\frac{e^z}{\sqrt{x^2+y^2}}\bigr)dv
+   =\iiint_\Omega\frac{e^z}{\sqrt{x^2+y^2}}dv$。
+
+$\Omega$：锥面与两平面之间。柱坐标：$0\le\theta\le2\pi,z\le r\le?$
+区域：$1\le z\le2$，对固定$z$，$r\le z$（锥内）。同时$z=1$以下没有，$z=2$以上没有。并且$z\le r\le?$...
+实际上区域是：锥面$r=z$和平面$z=1,z=2$围成。对固定$z\in[1,2]$，$r\in[0,z]$。
+
+$I=\int_0^{2\pi}\!\!\int_1^2\!\!\int_0^z\frac{e^z}{r}\cdot r\,dr\,dz\,d\theta
+   =2\pi\int_1^2 e^z\cdot z\,dz
+   =2\pi[ze^z-e^z]_1^2=2\pi e^2.$
+\answerbox{$2\pi e^2$}
+
+\section{B2 柱面部分右侧}
+
+\fbox{$\iint_\Sigma(x^3-yz)dydz-2x^2y\,dzdx+z\,dxdy$，
+$\Sigma$为$x^2+y^2=1,0\le z\le1$在第一、二卦限部分右侧。}
+
+这是非封闭曲面，不能直接用高斯。右侧指朝$x$正方向（即$\cos\alpha>0$）。
+
+参数化柱面：$x=\cos\theta,y=\sin\theta,z=z$，$\theta\in[-\frac\pi2,\frac\pi2]$（一、二卦限），$z\in[0,1]$。
+
+$dydz$：投影到$yz$面，右侧取$+$。$D_{yz}:y=\sin\theta$对应$y^2+z^2$？不，$y^2+z^2$不对。
+
+柱面$x=\sqrt{1-y^2}$（右侧）。$dydz=dzdy$从$y=-1$到$1$，$z=0$到$1$。右侧：$\cos\alpha>0$取$+$。
+$P=x^3-yz=(1-y^2)^{3/2}-yz$。
+$\iint_\Sigma P dydz=\iint_{D_{yz}}[(1-y^2)^{3/2}-yz]dydz$。
+
+Hmm this is getting complicated. Let me use the parametrization approach:
+$x=\cos\theta,y=\sin\theta,z=z$。$dS=1\cdot d\theta dz$（圆柱面$R=1$）。
+
+法向量（右侧/外侧）：$\vec n=(\cos\theta,\sin\theta,0)$。
+$dydz = \cos\theta\,dS = \cos\theta\,d\theta dz$
+$dzdx = \sin\theta\,dS = \sin\theta\,d\theta dz$
+$dxdy = 0\cdot dS = 0$
+
+$I = \int_0^1\int_{-\pi/2}^{\pi/2}[(\cos^3\theta - z\sin\theta)\cos\theta - 2\cos^2\theta\sin\theta\cdot\sin\theta + z\cdot0]d\theta dz$
+$= \int_0^1\int_{-\pi/2}^{\pi/2}[\cos^4\theta - z\sin\theta\cos\theta - 2\cos^2\theta\sin^2\theta]d\theta dz$.
+
+$\int_{-\pi/2}^{\pi/2}\cos^4\theta d\theta = 2\int_0^{\pi/2}\cos^4\theta d\theta = 2\cdot\frac{3\pi}{16} = \frac{3\pi}{8}$.
+$\int_{-\pi/2}^{\pi/2}\sin\theta\cos\theta d\theta = 0$ (odd).
+$\int_{-\pi/2}^{\pi/2}\cos^2\theta\sin^2\theta d\theta = \frac14\int_{-\pi/2}^{\pi/2}\sin^2(2\theta)d\theta = \frac14\cdot\frac\pi2 = \frac\pi8$.
+
+So $I = \int_0^1(\frac{3\pi}{8} - 2\cdot\frac\pi8)dz = \int_0^1\frac\pi8 dz = \frac\pi8$.
+\answerbox{$\frac\pi8$}
+
+\section{B3 下半球面上侧}
+
+\fbox{$\iint_\Sigma\frac{x\,dydz+(z+1)^2dxdy}{\sqrt{x^2+y^2+z^2}}$，
+$\Sigma:z=-\sqrt{1-x^2-y^2}$上侧。}
+
+下半球面上侧：$\cos\gamma>0$意味着法向量朝上（从球面外侧看是朝下，但"上侧"规定与$z$轴正方向夹角为锐角）。
+
+$z=-\sqrt{1-x^2-y^2}$，$\sqrt{x^2+y^2+z^2}=1$。
+
+$I = \iint_\Sigma x\,dydz + (z+1)^2dxdy$。
+
+投影$D:x^2+y^2\le1$。
+
+$dxdy$项：上侧取$+$。$\iint_D(-\sqrt{1-x^2-y^2}+1)^2dxdy$。
+$=\iint_D(1-\sqrt{1-x^2-y^2})^2dxdy
+  =\iint_D(1-2\sqrt{1-r^2}+1-r^2)r\,dr\,d\theta
+  =2\pi\int_0^1(2r-2r\sqrt{1-r^2}-r^3)dr$.
+
+$\int_0^1 2r\,dr = 1$。
+$\int_0^1 r^3 dr = \frac14$。
+$\int_0^1 r\sqrt{1-r^2}dr = \frac13$（令$u=1-r^2$）。
+
+$=2\pi[(1) - 2\cdot\frac13 - \frac14] = 2\pi(1-\frac23-\frac14) = 2\pi(\frac{12-8-3}{12}) = 2\pi\cdot\frac1{12} = \frac\pi6$.
+
+$dydz$项：投影到$yz$面，下半球面$x=-\sqrt{1-y^2-z^2}$，上侧对应$\cos\alpha$方向...
+对于球面$z=-\sqrt{1-x^2-y^2}$，"上侧"指法向量朝上。
+法向量：$(-z_x,-z_y,1)/\sqrt{1+z_x^2+z_y^2}$。
+$z_x = \frac{x}{\sqrt{1-x^2-y^2}}, z_y = \frac{y}{\sqrt{1-x^2-y^2}}$。
+所以$\cos\gamma>0$，$\cos\alpha,\cos\beta$由变换确定。
+
+利用高斯公式的逆向思路或参数化。
+参数化：$x=\sin\phi\cos\theta,y=\sin\phi\sin\theta,z=-\cos\phi$，
+$\phi\in[0,\pi/2],\theta\in[0,2\pi]$（下半球）。
+上侧：法向量朝上，即外法向（对下半球而言，外法向朝下）。实际上需要朝上的法向量...
+
+For the lower hemisphere $z=-\sqrt{1-x^2-y^2}$, the "upper side" (上侧) means $\cos\gamma > 0$, i.e., the normal points upward. The standard parametrization gives the outward normal which points downward. So we take the opposite.
+
+$\vec r_\phi\times\vec r_\theta = (\sin^2\phi\cos\theta,\sin^2\phi\sin\theta,\sin\phi\cos\phi)$ for the outward normal (downward on lower hemisphere).
+For upward normal, multiply by $-1$.
+
+$dydz = \cos\alpha\,dS$. The upward normal has $\cos\gamma > 0$ so it's the negative of the outward normal: $\vec n_{\text{up}} = -\vec n_{\text{out}}/\|\vec n_{\text{out}}\|$.
+
+Actually, let me use the projection formula. For $x = -\sqrt{1-y^2-z^2}$ (lower hemi, $x\le 0$ front part... this is getting messy).
+
+Let me use the symmetric approach. The first term $\iint_\Sigma x\,dydz$: by symmetry over the hemisphere, the contribution from $x$ integrated over $dydz$ should be zero because $x$ is odd with respect to the $yz$-plane and the surface is symmetric.
+
+Wait but the domain of the lower hemisphere is symmetric about $x=0$, and the function $x$ is odd. The "upper side" specification affects the sign but doesn't break symmetry. So $\iint_\Sigma x\,dydz = 0$.
+
+Actually wait, $x$ on the lower hemisphere — both $x>0$ and $x<0$ regions exist (it's the full lower hemisphere). With "upper side", the normal angles behave the same for both halves. So yes, $x\,dydz$ integrates to 0 by symmetry.
+
+Thus $I = 0 + \frac\pi6 = \frac\pi6$.
+\answerbox{$\frac\pi6$}
+
+\newpage
+% ===================================================================
+\part*{空间曲线积分}
+% ===================================================================
+
+\section{C1 球面与平面交线}
+
+\fbox{$\oint_\Gamma y\,dx+z\,dy+x\,dz$，
+$\Gamma:x^2+y^2+z^2=a^2,x+y+z=0$，从$z$轴正向看逆时针。}
+
+用斯托克斯公式。平面$x+y+z=0$上以$\Gamma$为边界的圆盘$\Sigma$，单位法向量$\vec n=\frac1{\sqrt3}(1,1,1)$。
+
+$P=y,Q=z,R=x$。
+旋度$\nabla\times\vec F = (R_y-Q_z,P_z-R_x,Q_x-P_y) = (0-1,0-1,0-1)=(-1,-1,-1)$。
+
+$I=\iint_\Sigma(\nabla\times\vec F)\cdot\vec n\,dS
+   =\iint_\Sigma(-1,-1,-1)\cdot\frac{(1,1,1)}{\sqrt3}\,dS
+   =-\frac3{\sqrt3}\iint_\Sigma dS = -\sqrt3\cdot\pi a^2$.
+\answerbox{$-\sqrt3\pi a^2$}
+
+\section{C2 曲面与平面交线}
+
+\fbox{$\oint_\Gamma 3y\,dx-xz\,dy+yz^2\,dz$，
+$\Gamma:x^2+y^2=2z,z=2$，从$z$轴正向看逆时针。}
+
+$z=2$平面上的圆$x^2+y^2=4$。斯托克斯：$P=3y,Q=-xz,R=yz^2$。
+
+旋度：$\nabla\times\vec F = (z^2-(-x),0-0,-z-3) = (z^2+x,0,-z-3)$。
+
+$\Sigma$为$z=2$平面上圆盘$x^2+y^2\le4$，法向量$\vec n=(0,0,1)$（上侧）。
+
+在$z=2$上：$\nabla\times\vec F = (4+x,0,-5)$。
+$(\nabla\times\vec F)\cdot\vec n = -5$。
+
+$I=\iint_\Sigma(-5)dS=-5\cdot\pi\cdot4=-20\pi$。
+\answerbox{$-20\pi$}
+
+\end{document}

@@ -1,0 +1,134 @@
+\documentclass[14pt,a4paper]{ctexart}
+
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{OCR 识别结果 — 待确认}}
+\fancyhead[R]{\textbf{ocr-pic-set2}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+
+\begin{document}
+
+\begin{center}
+{\Huge\bfseries ocr-pic-set2 识别结果}
+
+\bigskip
+{\large\color{red} 请逐题对照原图确认，确认后告知哪些题需要解答。}
+\end{center}
+
+\vspace{16pt}
+
+% ==================== 图片 1 ====================
+\section*{图片 1}
+
+\fbox{%
+\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{第1题.} 用两种方法（直接法和格林公式法）计算曲线积分：
+\[
+\oint_L (x^2 - xy^3)\,dx + (y^2 - 2xy)\,dy
+\]
+其中 $L$ 是以 $O(0,0)$、$A(2,0)$、$B(2,2)$ 和 $C(0,2)$ 为顶点的正方形的正向边界。
+
+\medskip
+
+\textbf{第2题.} 计算
+\[
+\oint_L xy^2\,dy - x^2y\,dx
+\]
+其中 $L$ 为正向圆周 $x^2 + y^2 = a^2$。%
+}%
+}
+
+% ==================== 图片 2 ====================
+\newpage
+\section*{图片 2}
+
+\fbox{%
+\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{第3题.} 计算
+\[
+\oint_L \left(1 + \frac{1}{x^2 + y^2}\right)(x\,dy - y\,dx)
+\]
+其中 $L$ 为正向圆周 $(x-1)^2 + (y-1)^2 = 1$。
+
+\medskip
+
+\textbf{第4题.} 利用曲线积分求下列曲线所围成的图形的面积：
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
+  \item 星形线 $x = a\cos^3 t$，$y = a\sin^3 t$；
+  \item 圆 $x^2 + y^2 = 2ax$。
+\end{enumerate}
+
+\medskip
+
+\textbf{第5题.} 证明曲线积分
+\[
+\int_L (x^4 + 4xy^3)\,dx + (6x^2y^2 - 5y^4)\,dy
+\]
+与路径无关，并求：
+\[
+\int_{(-2,-1)}^{(3,0)} (x^4 + 4xy^3)\,dx + (6x^2y^2 - 5y^4)\,dy.
+\]%
+}%
+}
+
+% ==================== 图片 3 ====================
+\newpage
+\section*{图片 3}
+
+\fbox{%
+\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+\textbf{第6题.} 验证下列 $P(x,y)\,dx + Q(x,y)\,dy$ 在整个 $xOy$ 平面内是某一函数 $u(x,y)$ 的全微分，并求出 $u(x,y)$：
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
+  \item $2xy\,dx + x^2\,dy$；
+  \item $(2x\cos y + y^2\cos x)\,dx + (2y\sin x - x^2\sin y)\,dy$。
+\end{enumerate}
+
+\bigskip
+
+\noindent\rule{\textwidth}{0.5pt}
+
+\bigskip
+
+\noindent\textbf{B类题 第1题.}
+设 $L$ 为上半圆周 $y = \sqrt{1 - x^2}$ 自点 $A(1,0)$ 到点 $B(0,1)$，求：
+\[
+\int_L \bigl(y^2 e^x + 3x^2 + 2xy + y^2\bigr)\,dx
+      + \bigl(2y e^x + x^2 + 2xy - 3y^2\bigr)\,dy.
+\]
+
+\medskip
+
+\noindent\textbf{B类题 第2题.}
+计算
+\[
+I = \oint_L \frac{x\,dy - y\,dx}{x^2 + y^2}
+\]
+其中 $L$ 为正向圆周 $x^2 + (y-1)^2 = R^2$（$R \neq 1$）。
+
+（提示：需分别讨论 $0 < R < 1$，$R > 1$ 的情形。）%
+}%
+}
+
+% ==================== 汇总 ====================
+\newpage
+\section*{题目汇总}
+
+\begin{enumerate}[leftmargin=*,itemsep=6pt]
+  \item[\textbf{1.}] 正方形边界 $\oint (x^2-xy^3)dx+(y^2-2xy)dy$，两种方法
+  \item[\textbf{2.}] 圆周 $\oint xy^2\,dy - x^2y\,dx$，$x^2+y^2=a^2$
+  \item[\textbf{3.}] 圆周 $\oint (1+\frac{1}{x^2+y^2})(x\,dy-y\,dx)$，$(x-1)^2+(y-1)^2=1$
+  \item[\textbf{4.}] 求面积：(1)星形线 (2)圆 $x^2+y^2=2ax$
+  \item[\textbf{5.}] 路径无关性证明 + 求积分值
+  \item[\textbf{6.}] 全微分验证 + 求原函数 $u(x,y)$（两小题）
+  \item[\textbf{B1.}] 上半圆弧路径的曲线积分
+  \item[\textbf{B2.}] $\oint \frac{x\,dy-y\,dx}{x^2+y^2}$，分类讨论 $R$
+\end{enumerate}
+
+\end{document}

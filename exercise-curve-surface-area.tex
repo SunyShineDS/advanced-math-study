@@ -1,0 +1,266 @@
+\documentclass[12pt,a4paper]{ctexart}
+
+% ===== 页面设置 =====
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+% ===== 页眉页脚 =====
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{高等数学（第七版·下册）——曲线积分的应用}}
+\fancyhead[R]{\textbf{旋转曲面面积}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+
+% ===== 方框答案 =====
+\newcommand{\answerbox}[1]{%
+  \begin{center}
+  \fbox{\color{red}\large\bfseries #1}
+  \end{center}
+}
+
+% ===== 文档信息 =====
+\title{\Huge\bfseries 曲线积分求旋转曲面面积}
+\author{高等数学（同济大学数学系~编·第七版·下册）}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+% ==================== 原题 ====================
+\section*{题目}
+\fbox{%
+  \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+    \textbf{3.}\; 用曲线积分求曲线段\;
+    $y = x^2,\; 0 \leq x \leq 2$\;
+    绕 $y$ 轴旋转所得的曲面面积。%
+  }%
+}
+\bigskip
+
+% ==================== 公式推导 ====================
+\section*{第一步：如何把题目转化为 $\displaystyle\int_L \cdots ds$ 的积分？}
+
+这是整个解题的\textbf{核心思想}。我们采用微元法，分四层理解。
+
+\medskip
+
+\noindent\textbf{\large ① 先把曲线切成无数小段}
+
+将曲线 $L$ 用分点 $M_0,M_1,\ldots,M_n$ 分成 $n$ 个小弧段。取其中第 $i$ 小段
+$\widehat{M_{i-1}M_i}$，记其弧长为 $\Delta s_i$。
+
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+  % 坐标轴
+  \draw[->,gray] (-0.3,0) -- (3.5,0) node[right] {$x$};
+  \draw[->,gray] (0,-0.3) -- (0,2.5) node[above] {$y$};
+  % 曲线
+  \draw[thick,blue,samples=60,domain=0:1.7] plot (\x,{\x*\x});
+  % 取一小段，放大
+  \draw[very thick,red] (1.0,{1.0*1.0}) -- (1.25,{1.25*1.25});
+  % 标注
+  \filldraw (1.0,1.0) circle (0.03) node[below left] {$M_{i-1}$};
+  \filldraw (1.25,1.5625) circle (0.03) node[right] {$M_i$};
+  \draw[<->,red] (1.35,1.3) -- node[right] {$\Delta s_i$} (1.35,1.55);
+  \node[blue] at (1.7,2.5) {$y=x^2$};
+  \node at (2,0) [below] {$x$ 轴};
+  % x_i
+  \draw[dashed,gray] (1.0,0) -- (1.0,1.0);
+  \draw[dashed,gray] (1.25,0) -- (1.25,1.5625);
+  \node at (1.0,0) [below] {$x_{i-1}$};
+  \node at (1.25,0) [below] {$x_i$};
+\end{tikzpicture}
+\end{center}
+
+\medskip
+
+\noindent\textbf{\large ② 每个小弧段绕 $y$ 轴旋转，形成什么？}
+
+将第 $i$ 小段 $\widehat{M_{i-1}M_i}$ 绕 $y$ 轴旋转一整圈。
+
+\emph{这段小弧很短}，可近似看作一条\textbf{倾斜的小线段}。它绕 $y$ 轴旋转后，
+形成一个\textbf{窄圆环带}（想象一个截头圆锥的侧面）：
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+  % Draw a perspective ring
+  \draw[fill=blue!10] (0,2) ellipse (2 and 0.5);
+  \draw[fill=blue!10] (0,2.5) ellipse (2.3 and 0.55);
+  % sides
+  \draw (2,2) -- (2.3,2.5);
+  \draw (-2,2) -- (-2.3,2.5);
+  % hidden lines
+  \draw[dashed] (2.3,2.5) arc (0:180:2.3 and 0.55);
+  \draw (1.8,3.5) -- (2.1,2.75);
+  \draw[->] (2.3,2.5) arc (0:-30:2.3 and 0.55) node[midway,right] {旋转};
+  % y-axis
+  \draw[->,gray,thick] (0,0.5) -- (0,4) node[left] {$y$};
+  % labels
+  \node at (1.8,2.25) {$2\pi x_i$ (周长)};
+  \draw[<->,red] (-2.3,2.8) -- node[above] {$\Delta s_i$ (弧宽)} (2.3,2.8);
+\end{tikzpicture}
+\end{center}
+
+\textbf{关键问题：这个窄环带的面积是多少？}
+
+\newpage
+
+\noindent\textbf{\large ③ 近似计算窄环带的面积}
+
+因为 $\Delta s_i$ 很短，环带上下几乎一样大。把它沿着母线剪开摊平，
+近似为一个\textbf{矩形}：
+
+\[
+\Delta S_i \;\approx\; \underbrace{(2\pi \times \text{半径})}_{\text{周长}}\, \times \,
+                         \underbrace{\Delta s_i}_{\text{宽度}}
+               \;=\; 2\pi \cdot \bar{x}_i \cdot \Delta s_i
+\]
+
+其中 $\bar{x}_i$ 是第 $i$ 小段上某点的 $x$ 坐标（可取该段上任一点的 $x$）。
+
+\begin{center}
+\fbox{%
+\begin{minipage}{0.7\textwidth}
+\centering
+\small
+$\Delta S_i$ = 环带侧面积 $\approx$（周长）$\times$（宽度）
+= $2\pi x_i \cdot \Delta s_i$
+\end{minipage}%
+}
+\end{center}
+
+\medskip
+
+\noindent\textbf{\large ④ 求和，取极限 $\to$ 积分}
+
+将每一小段的面积累加：
+\[
+S \approx \sum_{i=1}^n 2\pi \bar{x}_i \,\Delta s_i
+\]
+
+令分点无限加密（$n\to\infty$，$\Delta s_i \to 0$），上式取极限即得\textbf{第一类曲线积分}：
+\[
+\boxed{S = 2\pi \int_L x \, ds}
+\]
+
+这就是公式的由来！其中 $ds$ 是弧长微元，
+对函数 $y=f(x)$ 有 $ds = \sqrt{1+[f'(x)]^2}\,dx$。
+
+% ==================== 两种旋转轴对照 ====================
+\subsection*{绕不同轴的公式对比}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|c|c|c|}
+  \hline
+  \textbf{旋转轴} & \textbf{曲面面积公式} & \textbf{直观理解} \\
+  \hline
+  绕 $y$ 轴 & $S = 2\pi \displaystyle\int_L x\, ds$ & 半径 $= x$，周长 $=2\pi x$ \\
+  \hline
+  绕 $x$ 轴 & $S = 2\pi \displaystyle\int_L |y|\, ds$ & 半径 $= |y|$，周长 $=2\pi|y|$ \\
+  \hline
+\end{tabular}
+\end{center}
+
+\textbf{记忆方法：} 面积 = 曲线上的点离旋转轴的\textbf{距离}$\times 2\pi\times$弧长微元 再积分。
+
+简单说：\textcolor{red}{绕哪个轴转，就乘那点到该轴的距离的 $2\pi$ 倍}。
+
+% ==================== 解答 ====================
+\section*{解答}
+
+\noindent\textbf{步骤1：求 $y'(x)$ 并计算弧长微元 $ds$}
+\[
+y = x^2 \quad\Longrightarrow\quad y'(x) = 2x.
+\]
+\[
+ds = \sqrt{1 + \bigl[y'(x)\bigr]^2}\, dx
+    = \sqrt{1 + (2x)^2}\, dx
+    = \sqrt{1 + 4x^2}\, dx.
+\]
+
+\medskip
+
+\noindent\textbf{步骤2：代入旋转曲面面积公式}
+\[
+S = 2\pi \int_L x\, ds
+   = 2\pi \int_0^2 x \cdot \sqrt{1 + 4x^2}\, dx.
+\]
+
+\medskip
+
+\noindent\textbf{步骤3：换元积分}
+
+令 $u = 1 + 4x^2$，则：
+\[
+du = 8x\, dx \quad\Longrightarrow\quad x\, dx = \frac{1}{8}\, du.
+\]
+
+积分限变换：
+\[
+x = 0 \;\to\; u = 1,\qquad
+x = 2 \;\to\; u = 1 + 4 \times 4 = 17.
+\]
+
+代入：
+\[
+\begin{aligned}
+S &= 2\pi \int_1^{17} \sqrt{u} \cdot \frac{1}{8}\, du
+    = \frac{\pi}{4} \int_1^{17} u^{\frac{1}{2}}\, du \\[6pt]
+  &= \frac{\pi}{4} \cdot \frac{2}{3}\, u^{\frac{3}{2}} \Biggr|_1^{17} \\[6pt]
+  &= \frac{\pi}{6} \Bigl( 17^{\frac{3}{2}} - 1^{\frac{3}{2}} \Bigr).
+\end{aligned}
+\]
+
+\medskip
+
+\noindent\textbf{步骤4：化简结果}
+\[
+17^{\frac{3}{2}} = 17 \cdot \sqrt{17},
+\]
+\[
+\therefore\;
+S = \frac{\pi}{6} \bigl( 17\sqrt{17} - 1 \bigr).
+\]
+
+\bigskip
+
+\answerbox{$\displaystyle S = \frac{\pi}{6}\bigl(17\sqrt{17} - 1\bigr)$}
+
+\bigskip
+
+% ==================== 数值验证 ====================
+\section*{数值结果}
+
+\[
+\sqrt{17} \approx 4.1231,\quad
+17\sqrt{17} \approx 70.09,
+\]
+\[
+S \approx \frac{\pi}{6} \times 69.09 \approx 36.18.
+\]
+
+即 $S \approx 36.2$（平方单位）。
+
+% ==================== 方法小结 ====================
+\section*{方法小结}
+
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item \textbf{识别公式：} 绕 $y$ 轴旋转 $\to S = 2\pi\int_L x\,ds$\;
+        （绕 $x$ 轴则是 $S = 2\pi\int_L |y|\,ds$）
+  \item \textbf{求 $ds$：} $ds = \sqrt{1+(y')^2}\,dx$
+  \item \textbf{换元积分：} 凑微分 $x\,dx = \frac{1}{8}du$，化为 $\int \sqrt{u}\,du$ 型
+\end{enumerate}
+
+此题属于曲线积分的几何应用，在教材\S11.1 中与弧长、质心、转动惯量等内容并列，
+本质上是将平面曲线的弧长积分与旋转体的侧面积公式结合。
+
+\end{document}

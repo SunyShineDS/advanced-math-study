@@ -1,0 +1,324 @@
+\documentclass[12pt,a4paper]{ctexart}
+
+\usepackage[top=1.8cm,bottom=1.8cm,left=1.8cm,right=1.8cm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{曲线积分习题全解（二）}}
+\fancyhead[R]{\textbf{ocr-pic-set2}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+\titleformat{\section}[hang]{\Large\bfseries}{}{0pt}{}
+
+\newcommand{\answerbox}[1]{%
+  \begin{center}\fbox{\color{red}\large\bfseries #1}\end{center}}
+
+\begin{document}
+
+\begin{center}{\Huge\bfseries 曲线积分习题全解（二）}\end{center}
+\vspace{8pt}\hrule\vspace{8pt}
+
+% ===================================================================
+\section{第1题：正方形边界——直接法 + 格林公式}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+$\displaystyle\oint_L (x^2-xy^3)dx+(y^2-2xy)dy$，
+$L$ 为正方形 $O(0,0),A(2,0),B(2,2),C(0,2)$ 正向边界。}}
+
+\subsection*{法一：直接法（逐边参数化）}
+
+\[
+\begin{aligned}
+OA\;(y=0,dy=0): & \int_0^2 x^2dx = \frac{8}{3} \\[4pt]
+AB\;(x=2,dx=0): & \int_0^2 (y^2-4y)dy = \Bigl[\frac{y^3}{3}-2y^2\Bigr]_0^2 = -\frac{16}{3} \\[4pt]
+BC\;(y=2,dy=0): & \int_2^0 (x^2-8x)dx = -\Bigl[\frac{x^3}{3}-4x^2\Bigr]_0^2 = \frac{40}{3} \\[4pt]
+CO\;(x=0,dx=0): & \int_2^0 y^2dy = -\frac{8}{3}
+\end{aligned}
+\]
+
+\[
+I = \frac{8}{3} - \frac{16}{3} + \frac{40}{3} - \frac{8}{3} = \frac{24}{3} = 8.
+\]
+
+\subsection*{法二：格林公式}
+
+$P=x^2-xy^3,\;Q=y^2-2xy$，
+$\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y} = (-2y) - (-3xy^2) = 3xy^2-2y$.
+
+\[
+I = \iint_{[0,2]\times[0,2]} (3xy^2-2y)\,dxdy
+   = \int_0^2\Bigl[\frac{3}{2}x^2y^2-2xy\Bigr]_{x=0}^{x=2}dy
+   = \int_0^2(6y^2-4y)dy
+   = \Bigl[2y^3-2y^2\Bigr]_0^2 = 8.
+\]
+
+\answerbox{$I = 8$}
+
+% ===================================================================
+\section{第2题：圆周——格林公式}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+$\displaystyle\oint_L xy^2\,dy - x^2y\,dx$，$L$ 为正向圆周 $x^2+y^2=a^2$。}}
+
+$P=-x^2y,\;Q=xy^2$，
+$\dfrac{\partial Q}{\partial x}=y^2,\;\dfrac{\partial P}{\partial y}=-x^2$，
+$\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}=x^2+y^2$.
+
+\[
+I = \iint_D (x^2+y^2)\,dxdy
+   = \int_0^{2\pi}\int_0^a r^2\cdot r\,dr\,d\theta
+   = 2\pi\cdot\frac{a^4}{4}
+   = \frac{\pi a^4}{2}.
+\]
+
+\answerbox{$I = \dfrac{\pi a^4}{2}$}
+
+% ===================================================================
+\section{第3题：巧用格林公式}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+$\displaystyle\oint_L \Bigl(1+\frac{1}{x^2+y^2}\Bigr)(x\,dy-y\,dx)$，
+$L$ 为正向圆周 $(x-1)^2+(y-1)^2=1$。}}
+
+$P=-y(1+\frac{1}{x^2+y^2}),\;Q=x(1+\frac{1}{x^2+y^2})$.
+
+计算偏导数时注意 $\frac{\partial}{\partial x}\bigl(\frac{x}{x^2+y^2}\bigr)=\frac{y^2-x^2}{(x^2+y^2)^2}$：
+
+\[
+\frac{\partial Q}{\partial x}=1+\frac{1}{x^2+y^2}-\frac{2x^2}{(x^2+y^2)^2},\qquad
+\frac{\partial P}{\partial y}=-1-\frac{1}{x^2+y^2}+\frac{2y^2}{(x^2+y^2)^2}.
+\]
+
+\[
+\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}
+=2+\frac{2}{x^2+y^2}-\frac{2(x^2+y^2)}{(x^2+y^2)^2}=2.
+\]
+
+由于原点 $(0,0)$ 到圆心 $(1,1)$ 的距离 $\sqrt{2}>1$，原点在圆外，被积函数无奇点。
+
+\[
+I = \iint_D 2\,dxdy = 2\cdot\pi\cdot1^2 = 2\pi.
+\]
+
+\answerbox{$I = 2\pi$}
+
+% ===================================================================
+\section{第4题：用曲线积分求面积}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+利用曲线积分求面积：$A=\frac{1}{2}\oint_L x\,dy-y\,dx$。\\
+(1) 星形线 $x=a\cos^3t,\;y=a\sin^3t$\quad
+(2) 圆 $x^2+y^2=2ax$。}}
+
+\subsection*{(1) 星形线}
+
+\[
+dx=-3a\cos^2t\sin t\,dt,\qquad dy=3a\sin^2t\cos t\,dt.
+\]
+
+\[
+\begin{aligned}
+x\,dy-y\,dx &= a\cos^3t\cdot3a\sin^2t\cos t - a\sin^3t\cdot(-3a\cos^2t\sin t) \\
+           &= 3a^2\cos^2t\sin^2t(\cos^2t+\sin^2t)
+            = 3a^2\cos^2t\sin^2t
+            = \frac{3a^2}{4}\sin^2(2t).
+\end{aligned}
+\]
+
+\[
+A = \frac{1}{2}\cdot\frac{3a^2}{4}\int_0^{2\pi}\sin^2(2t)\,dt
+   = \frac{3a^2}{8}\cdot\pi
+   = \frac{3\pi a^2}{8}.
+\]
+
+\subsection*{(2) 圆 $x^2+y^2=2ax$（即 $(x-a)^2+y^2=a^2$）}
+
+参数化：$x=a(1+\cos\theta),\;y=a\sin\theta$，$\theta:0\to2\pi$。
+
+\[
+x\,dy-y\,dx = a(1+\cos\theta)\cdot a\cos\theta - a\sin\theta\cdot(-a\sin\theta)
+            = a^2(1+\cos\theta).
+\]
+
+\[
+A = \frac{1}{2}\int_0^{2\pi} a^2(1+\cos\theta)\,d\theta
+   = \frac{a^2}{2}\Bigl[\theta+\sin\theta\Bigr]_0^{2\pi}
+   = \pi a^2.
+\]
+
+\answerbox{$A_1 = \dfrac{3\pi a^2}{8},\qquad A_2 = \pi a^2$}
+
+% ===================================================================
+\section{第5题：路径无关性 + 求积分值}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+证明 $\int_L (x^4+4xy^3)dx+(6x^2y^2-5y^4)dy$ 与路径无关，
+并求 $\int_{(-2,-1)}^{(3,0)}$。}}
+
+\subsection*{证路径无关}
+
+$P=x^4+4xy^3,\;Q=6x^2y^2-5y^4$。
+
+\[
+\frac{\partial P}{\partial y}=12xy^2,\qquad
+\frac{\partial Q}{\partial x}=12xy^2.
+\]
+
+$\dfrac{\partial P}{\partial y}=\dfrac{\partial Q}{\partial x}$，故积分与路径无关。
+
+\subsection*{求原函数}
+
+由 $\frac{\partial u}{\partial x}=x^4+4xy^3$，得 $u=\frac{x^5}{5}+2x^2y^3+C(y)$。
+
+由 $\frac{\partial u}{\partial y}=6x^2y^2+C'(y)=6x^2y^2-5y^4$，得 $C'(y)=-5y^4$，$C(y)=-y^5+K$。
+
+\[
+u(x,y)=\frac{x^5}{5}+2x^2y^3-y^5+K.
+\]
+
+\subsection*{计算积分}
+
+\[
+\begin{aligned}
+u(3,0) &= \frac{243}{5}, \\[4pt]
+u(-2,-1) &= \frac{-32}{5}+2\cdot4\cdot(-1)-(-1)
+          = -\frac{32}{5}-8+1 = -\frac{67}{5}.
+\end{aligned}
+\]
+
+\[
+I = u(3,0)-u(-2,-1) = \frac{243}{5}-\Bigl(-\frac{67}{5}\Bigr)
+   = \frac{310}{5} = 62.
+\]
+
+\answerbox{$I = 62$}
+
+% ===================================================================
+\section{第6题：全微分验证 + 求 $u(x,y)$}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+验证是全微分并求 $u(x,y)$：\\
+(1) $2xy\,dx+x^2\,dy$\qquad
+(2) $(2x\cos y+y^2\cos x)dx+(2y\sin x-x^2\sin y)dy$。}}
+
+\subsection*{(1)}
+
+$P=2xy,\;Q=x^2$。
+$\frac{\partial P}{\partial y}=2x=\frac{\partial Q}{\partial x}$ ✓
+
+由 $\frac{\partial u}{\partial x}=2xy$，得 $u=x^2y+C(y)$。
+由 $\frac{\partial u}{\partial y}=x^2+C'(y)=x^2$，得 $C(y)=K$。
+
+\[
+\boxed{u(x,y)=x^2y+K}
+\]
+
+\subsection*{(2)}
+
+$P=2x\cos y+y^2\cos x,\;Q=2y\sin x-x^2\sin y$。
+
+\[
+\frac{\partial P}{\partial y}=-2x\sin y+2y\cos x,\qquad
+\frac{\partial Q}{\partial x}=2y\cos x-2x\sin y.
+\]
+
+$\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$ ✓
+
+由 $\frac{\partial u}{\partial x}=2x\cos y+y^2\cos x$，得 $u=x^2\cos y+y^2\sin x+C(y)$。
+由 $\frac{\partial u}{\partial y}=-x^2\sin y+2y\sin x+C'(y)=2y\sin x-x^2\sin y$，得 $C(y)=K$。
+
+\[
+\boxed{u(x,y)=x^2\cos y+y^2\sin x+K}
+\]
+
+\answerbox{全微分验证通过，原函数如上。}
+
+% ===================================================================
+\section{B类 第1题：路径无关 + 求积分}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+$\displaystyle\int_L (y^2e^x+3x^2+2xy+y^2)dx+(2ye^x+x^2+2xy-3y^2)dy$，
+$L$ 为上半圆 $y=\sqrt{1-x^2}$ 从 $A(1,0)$ 到 $B(0,1)$。}}
+
+\subsection*{验证路径无关}
+
+$\frac{\partial P}{\partial y}=2ye^x+2x+2y,\qquad
+\frac{\partial Q}{\partial x}=2ye^x+2x+2y$。相等 ✓
+
+\subsection*{求原函数}
+
+由 $\frac{\partial u}{\partial x}=y^2e^x+3x^2+2xy+y^2$，
+$u=y^2e^x+x^3+x^2y+xy^2+C(y)$。
+
+$\frac{\partial u}{\partial y}=2ye^x+x^2+2xy+C'(y)=2ye^x+x^2+2xy-3y^2$，
+$C'(y)=-3y^2,\;C(y)=-y^3+K$。
+
+\[
+u=y^2e^x+x^3+x^2y+xy^2-y^3+K.
+\]
+
+\subsection*{计算}
+
+\[
+u(0,1)=1\cdot1+0+0+0-1=0,\qquad
+u(1,0)=0+1+0+0-0=1.
+\]
+
+\[
+I = u(0,1)-u(1,0)=0-1=-1.
+\]
+
+\answerbox{$I = -1$}
+
+% ===================================================================
+\section{B类 第2题：经典积分——分类讨论}
+
+\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
+$\displaystyle I=\oint_L \frac{x\,dy-y\,dx}{x^2+y^2}$，
+$L$ 为正向圆周 $x^2+(y-1)^2=R^2\;(R\neq1)$。}}
+
+\subsection*{理论分析}
+
+\[
+P=-\frac{y}{x^2+y^2},\qquad Q=\frac{x}{x^2+y^2}.
+\]
+
+当 $(x,y)\neq(0,0)$ 时：
+\[
+\frac{\partial P}{\partial y}=-\frac{x^2-y^2}{(x^2+y^2)^2}=\frac{\partial Q}{\partial x}.
+\]
+
+\textbf{关键是原点 $(0,0)$ 是否在曲线内：}
+圆心 $(0,1)$ 到原点的距离为 $1$。
+
+\begin{itemize}[leftmargin=*]
+  \item 若 $0<R<1$：曲线不包围原点。由格林公式，$I=0$。
+  \item 若 $R>1$：曲线包围原点。绕原点的闭路积分为 $2\pi$（在小圆 $x^2+y^2=\varepsilon^2$ 上直接计算可得）。
+\end{itemize}
+
+\subsection*{$R>1$ 情形的计算}
+
+在圆周 $x^2+y^2=a^2$ 上取正向：
+\[
+x=a\cos t,\;y=a\sin t,\;t:0\to2\pi.
+\]
+\[
+\frac{x\,dy-y\,dx}{x^2+y^2}
+   =\frac{a\cos t\cdot a\cos t - a\sin t\cdot(-a\sin t)}{a^2}
+   = \cos^2t+\sin^2t = 1.
+\]
+\[
+\oint_{x^2+y^2=a^2} \frac{x\,dy-y\,dx}{x^2+y^2}
+   = \int_0^{2\pi} 1\,dt = 2\pi.
+\]
+
+此结果与半径 $a$ 无关，任何包围原点的正向闭曲线的积分值都是 $2\pi$。
+
+\answerbox{$I = \begin{cases} 0, & 0<R<1 \text{（不包围原点）}\\ 2\pi, & R>1 \text{（包围原点）} \end{cases}$}
+
+\end{document}
